@@ -12,3 +12,9 @@ vars:
     campaign_history: "{{ ref('snapchat_campaign_history_data') }}"
     creative_history: "{{ ref('snapchat_creative_history_data') }}"
     creative_url_tag_history: "{{ ref('snapchat_creative_url_tag_history_data') }}"
+
+seeds:
+  snapchat_ads_integration_tests:
+    snapchat_ad_hourly_report_data:
+      +column_types:
+        date: timestamp
