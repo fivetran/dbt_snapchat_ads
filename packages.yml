@@ -1,0 +1,2 @@
+packages:
+  - local: ../dbt_snapchat_ads_source
