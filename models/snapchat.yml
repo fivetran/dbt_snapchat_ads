@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: snapchat__account_report
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_account_id
+            - date_day
+
+  - name: snapchat__campaign_report
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - campaign_id
+            - date_day
+
+  - name: snapchat__ad_squad_report
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_squad_id
+            - date_day
