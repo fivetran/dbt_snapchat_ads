@@ -1,2 +1,7 @@
 packages:
-  - local: ../dbt_snapchat_ads_source
+  # - local: ../dbt_snapchat_ads_source
+  # - local: ../../dbt_snapchat_ads_source
+
+  - git: "https://github.com/fivetran/dbt_snapchat_ads_source"
+    revision: main
+    warn-unpinned: false

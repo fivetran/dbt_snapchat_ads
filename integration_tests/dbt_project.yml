@@ -1,0 +1,14 @@
+name: 'snapchat_ads_integration_tests'
+version: '1.0.0'
+profile: 'integration_tests'
+config-version: 2
+
+vars: 
+  snapchat_ads_source:
+    ad_account_history:  "{{ ref('snapchat_ad_account_history_data') }}"
+    ad_history: "{{ ref('snapchat_ad_history_data') }}"
+    ad_hourly_report: "{{ ref('snapchat_ad_hourly_report_data') }}"
+    ad_squad_history: "{{ ref('snapchat_ad_squad_history_data') }}"
+    campaign_history: "{{ ref('snapchat_campaign_history_data') }}"
+    creative_history: "{{ ref('snapchat_creative_history_data') }}"
+    creative_url_tag_history: "{{ ref('snapchat_creative_url_tag_history_data') }}"
