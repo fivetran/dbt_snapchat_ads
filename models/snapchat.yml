@@ -2,22 +2,124 @@ version: 2
 
 models:
   - name: snapchat__account_report
+    description: Each record represents the daily performance of a Snapchat ad account.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ad_account_id
             - date_day
+    columns:
+      - name: date_day
+        description: The date of the report.
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: spend
+        description: The spend on the ad in the given day.
+      - name: impressions
+        description: The number of impressions the ad had on the given day.
+      - name: swipes
+        description: The number of swipes the ad had on the given day.
 
   - name: snapchat__campaign_report
+    description: Each record represents the daily performance of a Snapchat campaign.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - campaign_id
             - date_day
+    columns:
+      - name: date_day
+        description: The date of the report.
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: campaign_id
+        description: The ID of the campaign in Snapchat.
+      - name: campaign_name
+        description: The name of the campaign in Snapchat.
+      - name: spend
+        description: The spend on the ad in the given day.
+      - name: impressions
+        description: The number of impressions the ad had on the given day.
+      - name: swipes
+        description: The number of swipes the ad had on the given day.
 
   - name: snapchat__ad_squad_report
+    description: Each record represents the daily performance of a Snapchat ad squad.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ad_squad_id
             - date_day
+    columns:
+      - name: date_day
+        description: The date of the report.
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: campaign_id
+        description: The ID of the campaign in Snapchat.
+      - name: campaign_name
+        description: The name of the campaign in Snapchat.
+      - name: ad_squad_id
+        description: The ID of the ad squad in Snapchat.
+      - name: ad_squad_name
+        description: The name of the ad squad in Snapchat.
+      - name: spend
+        description: The spend on the ad in the given day.
+      - name: impressions
+        description: The number of impressions the ad had on the given day.
+      - name: swipes
+        description: The number of swipes the ad had on the given day.
+
+  - name: snapchat__ad_adapter
+    description: Each record represents the daily performance of a Snapchat ad at the URL level.
+    columns:
+      - name: date_day
+        description: The date of the report.
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: campaign_id
+        description: The ID of the campaign in Snapchat.
+      - name: campaign_name
+        description: The name of the campaign in Snapchat.
+      - name: ad_squad_id
+        description: The ID of the ad squad in Snapchat.
+      - name: ad_squad_name
+        description: The name of the ad squad in Snapchat.
+      - name: ad_id
+        description: The ID of the ad in Snapchat.
+      - name: ad_name
+        description: The name of the ad in Snapchat.
+      - name: creative_id
+        description: The ID of the creative in Snapchat.
+      - name: creative_name
+        description: The name of the creative in Snapchat.
+      - name: base_url
+        description: The base URL of the ad, extracted from the web_view_url.
+      - name: url_host
+        description: The URL host of the ad, extracted from the web_view_url.
+      - name: url_path
+        description: The URL path of the ad, extracted from the web_view_url.
+      - name: utm_source
+        description: The utm_source parameter of the ad, extracted from the web_view_url.
+      - name: utm_medium
+        description: The utm_medium parameter of the ad, extracted from the web_view_url.
+      - name: utm_campaign
+        description: The utm_campaign parameter of the ad, extracted from the web_view_url.
+      - name: utm_content
+        description: The utm_content parameter of the ad, extracted from the web_view_url.
+      - name: utm_term
+        description: The utm_term parameter of the ad, extracted from the web_view_url.
+      - name: spend
+        description: The spend on the ad in the given day.
+      - name: impressions
+        description: The number of impressions the ad had on the given day.
+      - name: swipes
+        description: The number of swipes the ad had on the given day.
