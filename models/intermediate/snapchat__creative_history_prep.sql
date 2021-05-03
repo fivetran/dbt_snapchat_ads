@@ -8,6 +8,7 @@ with base as (
 
     select *
     from {{ var('creative_url_tag_history') }}
+    where is_most_recent_record = true
 
 ), url_tags_pivoted as (
 
