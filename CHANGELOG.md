@@ -1,3 +1,8 @@
+# dbt_snapchat_ads v0.3.1
+🎉 Fix creative_id bug [issue]](https://github.com/fivetran/dbt_snapchat_ads/issues/8) 🎉
+
+- Removed `creative_id` from the ad adapter model. Previously we brought in `creative_id` into the ad adapter model, but snapchat metrics only deliver at the `ad_id` level and ads may have more than one creative. Therefore this potentially over-attributed metrics to a creative and caused duplicates for metrics like spend and impression. 
+
 # dbt_snapchat_ads v0.3.0
 🎉 dbt v1.0.0 Compatibility 🎉
 ## 🚨 Breaking Changes 🚨
