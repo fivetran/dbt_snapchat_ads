@@ -11,7 +11,7 @@ This package contains transformation models, designed to work simultaneously wit
 
 | **model**                    | **description**                                                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| snapchat__ad_adapter         | Each record represents the daily ad performance of each creative, including information about the used UTM parameters. |
+| snapchat__ad_adapter         | Each record represents the daily ad performance of each ad, including information about the used UTM parameters. |
 | snapchat__account_report     | Each record represents the daily ad performance of each account.                                                       |
 | snapchat__campaign_report    | Each record represents the daily ad performance of each campaign.                                                      |
 | snapchat__ad_squad_report    | Each record represents the daily ad performance of each ad squad.                                                        |
