@@ -44,8 +44,6 @@ with report as (
         ad_squads.ad_squad_name,
         ads.ad_id,
         ads.ad_name,
-        creatives.creative_id,
-        creatives.creative_name,
         creatives.base_url,
         creatives.url_host,
         creatives.url_path,
@@ -68,7 +66,7 @@ with report as (
         on ad_squads.campaign_id = campaigns.campaign_id
     left join accounts
         on campaigns.ad_account_id = accounts.ad_account_id
-    {{ dbt_utils.group_by(19) }}
+    {{ dbt_utils.group_by(17) }}
 
 
 )

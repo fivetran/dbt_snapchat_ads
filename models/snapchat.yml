@@ -97,10 +97,6 @@ models:
         description: The ID of the ad in Snapchat.
       - name: ad_name
         description: The name of the ad in Snapchat.
-      - name: creative_id
-        description: The ID of the creative in Snapchat.
-      - name: creative_name
-        description: The name of the creative in Snapchat.
       - name: base_url
         description: The base URL of the ad, extracted from the web_view_url.
       - name: url_host
