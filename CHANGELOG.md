@@ -1,3 +1,5 @@
+# dbt_snapchat_ads 0.4.0
+
 # dbt_snapchat_ads v0.3.1
 🎉 Fix creative_id bug [issue]](https://github.com/fivetran/dbt_snapchat_ads/issues/8) 🎉
 

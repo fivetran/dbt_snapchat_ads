@@ -25,7 +25,7 @@ Include in your `packages.yml`
 ```yaml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=0.3.0", "<0.4.0"]
+    version: [">=0.4.0", "<0.5.0"]
 ```
 
 ## Configuration
