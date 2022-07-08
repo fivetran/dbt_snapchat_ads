@@ -44,7 +44,19 @@ with ad_hourly as (
         campaigns.campaign_name,
         ad_squads.ad_squad_id,
         ad_squads.ad_squad_name,
+        ads.ad_id,
+        ads.ad_name,
+        creatives.creative_id,
+        creatives.creative_name,
         account.currency,
+        creatives.base_url,
+        creatives.url_host,
+        creatives.url_path,
+        creatives.utm_source,
+        creatives.utm_medium,
+        creatives.utm_campaign,
+        creatives.utm_content,
+        creatives.utm_term,
         sum(ad_hourly.swipes) as swipes,
         sum(ad_hourly.impressions) as impressions,
         sum(ad_hourly.spend) as spend
@@ -61,7 +73,7 @@ with ad_hourly as (
     left join creatives
         on ads.creative_id = creatives.creative_id
     
-    {{ dbt_utils.group_by(9) }}
+    {{ dbt_utils.group_by(21) }}
 
 )
 
