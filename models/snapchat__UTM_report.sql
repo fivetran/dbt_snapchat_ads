@@ -59,7 +59,7 @@ with ad_hourly as (
         creatives.utm_term,
         sum(ad_hourly.swipes) as swipes,
         sum(ad_hourly.impressions) as impressions,
-        sum(ad_hourly.spend) as spend
+        round(sum(ad_hourly.spend)) as spend
     
     from ad_hourly
     left join ads 

@@ -43,7 +43,7 @@ with ad_hourly as (
         account.currency,
         sum(ad_hourly.swipes) as swipes,
         sum(ad_hourly.impressions) as impressions,
-        sum(ad_hourly.spend) as spend
+        round(sum(ad_hourly.spend)) as spend
     
     from ad_hourly
     left join ads 

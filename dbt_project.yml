@@ -17,3 +17,6 @@ models:
   snapchat_ads:
     +schema: snapchat_ads
     +materialized: table
+    intermediate:
+      materialized: table
+
