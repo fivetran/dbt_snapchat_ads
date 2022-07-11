@@ -20,19 +20,6 @@ with ad_hourly as (
     from {{ var('ad_history') }}
     where is_most_recent_record = true
 
-), ad_squads as (
-
-    select *
-    from {{ var('ad_squad_history') }}
-    where is_most_recent_record = true
-
-), campaigns as (
-
-    select *
-    from {{ var('campaign_history') }}
-    where is_most_recent_record = true
-
-
 ), aggregated as (
 
     select
@@ -50,14 +37,10 @@ with ad_hourly as (
     from ad_hourly
     left join ads 
         on ad_hourly.ad_id = ads.ad_id
-    left join ad_squads
-        on ads.ad_squad_id = ad_squads.ad_squad_id
-    left join campaigns
-        on ad_squads.campaign_id = campaigns.campaign_id
-    left join account
-        on campaigns.ad_account_id = account.ad_account_id
     left join creatives
         on ads.creative_id = creatives.creative_id
+    left join account
+        on creatives.ad_account_id = account.ad_account_id
     
     {{ dbt_utils.group_by(7) }}
 

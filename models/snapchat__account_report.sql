@@ -3,11 +3,6 @@ with ad_hourly as (
     select *
     from {{ var('ad_hourly_report') }}
 
-), creatives as (
-
-    select *
-    from {{ ref('snapchat__creative_history_prep') }}
-
 ), account as (
 
     select *
@@ -54,8 +49,6 @@ with ad_hourly as (
         on ad_squads.campaign_id = campaigns.campaign_id
     left join account
         on campaigns.ad_account_id = account.ad_account_id
-    left join creatives
-        on ads.creative_id = creatives.creative_id
 
     {{ dbt_utils.group_by(5) }}
 

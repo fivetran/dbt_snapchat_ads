@@ -120,7 +120,7 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - creative_id
+            - ad_id
             - date_day
     columns:
       - name: platform
