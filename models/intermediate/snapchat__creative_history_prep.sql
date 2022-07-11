@@ -39,7 +39,7 @@ with base as (
         coalesce(url_tags_pivoted.utm_term, {{ dbt_utils.get_url_parameter('base.url', 'utm_term') }}) as utm_term
     from base
     left join url_tags_pivoted
-        using (creative_id)
+        on base.creative_id = url_tags_pivoted.creative_id
 
 )
 

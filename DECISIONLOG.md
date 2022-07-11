@@ -1,0 +1,3 @@
+# Snapchat Ads Decision Log
+## Ads Associated with Multiple Ad Groups and Multiple Campaigns
+An ad can be associated with multiple ad squads and therefore multiple campaigns on any given day. Therefore, `snapchat_ads__ad_report` doesn't contain ad_squad or campaign fields since it reports on an ad level. Similarly, `snapchat_ads__campaign_report` and `snapchat_ads__ad_squad_report` do not contain ad fields. This prevents overattributing performance to just one ad.
