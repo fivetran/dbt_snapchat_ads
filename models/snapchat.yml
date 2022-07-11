@@ -9,12 +9,45 @@ models:
             - ad_account_id
             - date_day
     columns:
+      - name: platform
+        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
         description: The ID of the account in Snapchat.
       - name: ad_account_name
         description: The name of the account in Snapchat.
+      - name: currency
+        description: The current used by the account in Snapchat.
+      - name: spend
+        description: The spend on the ad in the given day.
+      - name: impressions
+        description: The number of impressions the ad had on the given day.
+      - name: swipes
+        description: The number of swipes the ad had on the given day.
+
+  - name: snapchat__ad_report
+    description: Each record represents the daily performance of a Snapchat ad account.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_id
+            - date_day
+    columns:
+      - name: platform
+        description: Advertising platform.
+      - name: date_day
+        description: The date of the report.
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: ad_id
+        description: The ID of the ad in Snapchat.
+      - name: ad_name
+        description: The name of the ad in Snapchat.
+      - name: currency
+        description: The current used by the account in Snapchat.
       - name: spend
         description: The spend on the ad in the given day.
       - name: impressions
@@ -30,6 +63,8 @@ models:
             - campaign_id
             - date_day
     columns:
+      - name: platform
+        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
@@ -55,6 +90,8 @@ models:
             - ad_squad_id
             - date_day
     columns:
+      - name: platform
+        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
@@ -69,6 +106,8 @@ models:
         description: The ID of the ad squad in Snapchat.
       - name: ad_squad_name
         description: The name of the ad squad in Snapchat.
+      - name: currency
+        description: The current used by the account in Snapchat.
       - name: spend
         description: The spend on the ad in the given day.
       - name: impressions
@@ -76,9 +115,16 @@ models:
       - name: swipes
         description: The number of swipes the ad had on the given day.
 
-  - name: snapchat__ad_adapter
-    description: Each record represents the daily performance of a Snapchat ad at the URL level.
+  - name: snapchat__UTM_report
+    description: Each record represents the daily performance of a Snapchat ad account.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - creative_id
+            - date_day
     columns:
+      - name: platform
+        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
@@ -97,6 +143,12 @@ models:
         description: The ID of the ad in Snapchat.
       - name: ad_name
         description: The name of the ad in Snapchat.
+      - name: creative_id
+        description: The name of the creative in Snapchat.
+      - name: creative_name
+        description: The name of the creative in Snapchat.
+      - name: currency
+        description: The current used by the account in Snapchat.
       - name: base_url
         description: The base URL of the ad, extracted from the web_view_url.
       - name: url_host

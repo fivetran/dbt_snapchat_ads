@@ -40,10 +40,6 @@ with ad_hourly as (
         cast(ad_hourly.date_hour as date) as date_day,
         account.ad_account_id,
         account.ad_account_name,
-        campaigns.campaign_id,
-        campaigns.campaign_name,
-        ad_squads.ad_squad_id,
-        ad_squads.ad_squad_name,
         ads.ad_id,
         ads.ad_name,
         account.currency,
@@ -63,7 +59,7 @@ with ad_hourly as (
     left join creatives
         on ads.creative_id = creatives.creative_id
     
-    {{ dbt_utils.group_by(11) }}
+    {{ dbt_utils.group_by(7) }}
 
 )
 
