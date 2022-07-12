@@ -65,15 +65,6 @@ vars:
     snapchat_ads_schema: your_schema_name 
 ```
 
-### Change the source table references
-If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:
-> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/dbt_project.yml) variable declarations to see the expected names.
-    
-```yml
-vars:
-    snapchat_ads_<default_source_table_name>_identifier: your_table_name 
-```
-
 ## (Optional) Step 4: Additional configurations
 <details><summary>Expand for configurations</summary>
     
