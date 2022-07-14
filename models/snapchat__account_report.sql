@@ -31,7 +31,6 @@ with ad_hourly as (
 ), aggregated as (
 
     select
-        'snapchat_ads' as platform, 
         cast(ad_hourly.date_hour as date) as date_day,
         account.ad_account_id,
         account.ad_account_name,
@@ -50,7 +49,7 @@ with ad_hourly as (
     left join account
         on campaigns.ad_account_id = account.ad_account_id
 
-    {{ dbt_utils.group_by(5) }}
+    {{ dbt_utils.group_by(4) }}
 
 )
 

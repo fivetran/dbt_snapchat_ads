@@ -9,8 +9,6 @@ models:
             - ad_account_id
             - date_day
     columns:
-      - name: platform
-        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
@@ -34,8 +32,6 @@ models:
             - ad_id
             - date_day
     columns:
-      - name: platform
-        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
@@ -63,8 +59,6 @@ models:
             - campaign_id
             - date_day
     columns:
-      - name: platform
-        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
@@ -90,8 +84,6 @@ models:
             - ad_squad_id
             - date_day
     columns:
-      - name: platform
-        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
@@ -123,8 +115,6 @@ models:
             - ad_id
             - date_day
     columns:
-      - name: platform
-        description: Advertising platform.
       - name: date_day
         description: The date of the report.
       - name: ad_account_id
