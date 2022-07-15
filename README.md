@@ -66,6 +66,15 @@ vars:
 ```
 
 ## (Optional) Step 4: Additional configurations
+### Passing Through Additional Metrics
+By default, this package will select fields from the source tables to pass into the staging models, that are shown in the existing staging models. If you would like to pass through additional metrics to the staging models, add the following configuration to your `dbt_project.yml` file:
+
+```yml
+vars:
+  snapchat_ads__ad_hourly_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.ad_hourly_report
+  snapchat_ads__ad_squad_hourly_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.ad_squad_hourly_report
+  snapchat_ads__campaign_hourly_report_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.campaign_hourly_report
+```
     
 ### Change the build schema
 By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:

@@ -69,6 +69,8 @@ models:
         description: The ID of the campaign in Snapchat.
       - name: campaign_name
         description: The name of the campaign in Snapchat.
+      - name: currency
+        description: The current used by the account in Snapchat.
       - name: spend
         description: The spend on the ad in the given day.
       - name: impressions

@@ -36,6 +36,10 @@ with ad_squad_hourly as (
         sum(ad_squad_hourly.swipes) as swipes,
         sum(ad_squad_hourly.impressions) as impressions,
         round(sum(ad_squad_hourly.spend)) as spend
+
+        {% for metric in var('snapchat_ads__ad_squad_hourly_passthrough_metrics', []) %}
+        , sum(ad_squad_hourly.{{ metric }}) as {{ metric }}
+        {% endfor %}
     
     from ad_squad_hourly
     left join ad_squads
