@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: snapchat__account_report
+  - name: snapchat_ads__account_report
     description: Each record represents the daily performance of a Snapchat ad account.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -24,7 +24,7 @@ models:
       - name: swipes
         description: The number of swipes the ad had on the given day.
 
-  - name: snapchat__ad_report
+  - name: snapchat_ads__ad_report
     description: Each record represents the daily performance of a Snapchat ad account.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -51,7 +51,7 @@ models:
       - name: swipes
         description: The number of swipes the ad had on the given day.
 
-  - name: snapchat__campaign_report
+  - name: snapchat_ads__campaign_report
     description: Each record represents the daily performance of a Snapchat campaign.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -76,7 +76,7 @@ models:
       - name: swipes
         description: The number of swipes the ad had on the given day.
 
-  - name: snapchat__ad_squad_report
+  - name: snapchat_ads__ad_squad_report
     description: Each record represents the daily performance of a Snapchat ad squad.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -107,8 +107,8 @@ models:
       - name: swipes
         description: The number of swipes the ad had on the given day.
 
-  - name: snapchat__url_report
-    description: Each record represents the daily performance of a Snapchat ad account.
+  - name: snapchat_ads__url_report
+    description: Each record represents the daily performance of Snapchat ads that leverage urls.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -121,22 +121,10 @@ models:
         description: The ID of the account in Snapchat.
       - name: ad_account_name
         description: The name of the account in Snapchat.
-      - name: campaign_id
-        description: The ID of the campaign in Snapchat.
-      - name: campaign_name
-        description: The name of the campaign in Snapchat.
-      - name: ad_squad_id
-        description: The ID of the ad squad in Snapchat.
-      - name: ad_squad_name
-        description: The name of the ad squad in Snapchat.
       - name: ad_id
         description: The ID of the ad in Snapchat.
       - name: ad_name
         description: The name of the ad in Snapchat.
-      - name: creative_id
-        description: The name of the creative in Snapchat.
-      - name: creative_name
-        description: The name of the creative in Snapchat.
       - name: currency
         description: The current used by the account in Snapchat.
       - name: base_url

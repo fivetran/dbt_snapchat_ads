@@ -9,12 +9,6 @@ with campaign_hourly as (
     from {{ var('ad_account_history') }}
     where is_most_recent_record = true
 
-), ad_squads as (
-
-    select *
-    from {{ var('ad_squad_history') }}
-    where is_most_recent_record = true
-
 ), campaigns as (
 
     select *
@@ -38,8 +32,6 @@ with campaign_hourly as (
     from campaign_hourly
     left join campaigns
         on campaign_hourly.campaign_id = campaigns.campaign_id
-    left join ad_squads
-        on campaigns.campaign_id = ad_squads.campaign_id
     left join account
         on campaigns.ad_account_id = account.ad_account_id
     

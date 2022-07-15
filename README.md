@@ -15,7 +15,7 @@
 
 # Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
 # 📣 What does this dbt package do?
-- Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/snapchat-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/snapchat-ads#schemainformation) and builds off the output of our [Snapchat Ads source package](https://github.com/fivetran/dbt_snapchat_ads_source).
+- Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/snapchat_ads) in the format described by [this ERD](https://fivetran.com/docs/applications/snapchat_ads#schemainformation) and builds off the output of our [Snapchat Ads source package](https://github.com/fivetran/dbt_snapchat_ads_source).
 - Generates a comprehensive data dictionary of your source and modeled Snapchat Ads data through the [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/).
 - Enables you to better understand your marketing performance based on different levels of granularity:
 
@@ -24,11 +24,11 @@ The following table provides a detailed list of all models materialized within t
 
 | **Model**                    | **Description**                                                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| snapchat__account_report     | Each record represents the daily ad performance of each account.                                                       |
-| snapchat__campaign_report    | Each record represents the daily ad performance of each campaign.                                                      |
-| snapchat__ad_report          | Each record represents the daily ad performance of each ad.                                                            |
-| snapchat__UTM_report         | Each record represents the daily ad performance of each UTM parameter.                                                           |
-| snapchat__ad_squad_report    | Each record represents the daily ad performance of each ad squad.         
+| [snapchat_ads__account_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__account_report)     | Each record represents the daily ad performance of each account.                                                       |
+| [snapchat_ads__campaign_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_report)    | Each record represents the daily ad performance of each campaign.                                                      |
+| [snapchat_ads__ad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_report)          | Each record represents the daily ad performance of each ad.                                                            |
+| [snapchat_ads__url_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__url_report)         | Each record represents the daily ad performance of each ad url.                                                           |
+| [snapchat_ads__ad_squad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report)    | Each record represents the daily ad performance of each ad squad.         
 # 🎯 How do I use the dbt package?
 
 ## Step 1: Prerequisites
@@ -66,7 +66,6 @@ vars:
 ```
 
 ## (Optional) Step 4: Additional configurations
-<details><summary>Expand for configurations</summary>
     
 ### Change the build schema
 By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
@@ -78,15 +77,11 @@ models:
     snapchat_ads:
       +schema: my_new_schema_name # leave blank for just the target_schema
 ```
-    
-</details>
+
 
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
-<details><summary>Expand for details</summary>
-<br>
     
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
-</details>
 
 # 🔍 Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. Please be aware that these dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
@@ -106,6 +101,9 @@ packages:
 # 🙌 How is this package maintained and can I contribute?
 ## Package Maintenance
 The Fivetran team maintaining this package _only_ maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://hub.getdbt.com/fivetran/snapchat_ads/latest/) of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_snapchat_ads/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
+
+## Opinionated Decisions
+In creating this package, which is meant for a wide range of use cases, we had to take opinionated stances on a few different questions we came across during development. We've consolidated significant choices we made in the [DECISIONLOG.md](https://github.com/fivetran/dbt_snapchat_ads/blob/main/DECISIONLOG.md), and will continue to update as the package evolves. We are always open to and encourage feedback on these choices, and the package in general.
 
 ## Contributions
 A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions! 

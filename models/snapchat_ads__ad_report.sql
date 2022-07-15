@@ -6,7 +6,7 @@ with ad_hourly as (
 ), creatives as (
 
     select *
-    from {{ ref('snapchat__creative_history_prep') }}
+    from {{ ref('snapchat_ads__creative_history_prep') }}
 
 ), account as (
 
