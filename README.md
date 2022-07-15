@@ -15,7 +15,7 @@
 
 # Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
 # 📣 What does this dbt package do?
-- Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/snapchat_ads) in the format described by [this ERD](https://fivetran.com/docs/applications/snapchat_ads#schemainformation) and builds off the output of our [Snapchat Ads source package](https://github.com/fivetran/dbt_snapchat_ads_source).
+- Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/snapchat-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/snapchat-ads#schemainformation) and builds off the output of our [Snapchat Ads source package](https://github.com/fivetran/dbt_snapchat_ads_source).
 - Generates a comprehensive data dictionary of your source and modeled Snapchat Ads data through the [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/).
 - Enables you to better understand your marketing performance based on different levels of granularity:
 
