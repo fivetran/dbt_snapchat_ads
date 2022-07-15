@@ -1,14 +1,14 @@
 # dbt_snapchat_ads v0.4.0
 ## 🎉 Feature Enhancements 🎉
-This PR applies the Ad Reporting V2 updates:
+PR [#11](https://github.com/fivetran/dbt_snapchat_ads/pull/11) applies the Ad Reporting V2 updates:
 
 - Addition of the following new end models. These models were added to provide further flexibility and ensure greater accuracy of your Snapchat Ads reporting. Additionally, these new end models will be leveraged in the respective downstream [dbt_ad_reporting](https://github.com/fivetran/dbt_ad_reporting) models.
   - `snapchat_ads__ads_report`
     - Each record in this table represents the daily performance at the ads level.
   - `snapchat_ads__creative_report`
     - Each record in this table represents the daily performance at the campaign level.
-  - `snapchat_ads__UTM_report`
-    - Each record in this table represents the daily performance at the UTM level.
+  - `snapchat_ads__url_report`
+    - Each record in this table represents the daily performance at the url level.
 
 - Applies README standardization updates
 - Introduces the identifier variable for all source models

@@ -107,7 +107,7 @@ models:
       - name: swipes
         description: The number of swipes the ad had on the given day.
 
-  - name: snapchat__utm_report
+  - name: snapchat__url_report
     description: Each record represents the daily performance of a Snapchat ad account.
     tests:
       - dbt_utils.unique_combination_of_columns:
