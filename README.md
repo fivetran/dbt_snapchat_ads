@@ -61,7 +61,7 @@ By default, this package runs using your destination and the `snapchat_ads` sche
 
 ```yml
 vars:
-    snapchat_ads_database: your_destination_name
+    snapchat_ads_database: your_destination_nam
     snapchat_ads_schema: your_schema_name 
 ```
 
