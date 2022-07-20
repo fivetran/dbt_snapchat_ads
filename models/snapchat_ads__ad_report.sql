@@ -26,7 +26,7 @@ with ad_hourly as (
         cast(ad_hourly.date_hour as date) as date_day,
         account.ad_account_id,
         account.ad_account_name,
-        ads.ad_id,
+        ad_hourly.ad_id,
         ads.ad_name,
         account.currency,
         sum(ad_hourly.swipes) as swipes,

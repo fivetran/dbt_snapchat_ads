@@ -30,7 +30,7 @@ with ad_squad_hourly as (
         account.ad_account_name,
         campaigns.campaign_id,
         campaigns.campaign_name,
-        ad_squads.ad_squad_id,
+        ad_squad_hourly.ad_squad_id,
         ad_squads.ad_squad_name,
         account.currency,
         sum(ad_squad_hourly.swipes) as swipes,

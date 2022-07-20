@@ -22,7 +22,7 @@ with campaign_hourly as (
         cast(campaign_hourly.date_hour as date) as date_day,
         account.ad_account_id,
         account.ad_account_name,
-        campaigns.campaign_id,
+        campaign_hourly.campaign_id,
         campaigns.campaign_name,
         account.currency,
         sum(campaign_hourly.swipes) as swipes,
