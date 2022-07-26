@@ -75,6 +75,15 @@ vars:
   snapchat_ads__ad_squad_hourly_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.ad_squad_hourly_report
   snapchat_ads__campaign_hourly_report_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.campaign_hourly_report
 ```
+
+### Change the source table references
+If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:
+> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/dbt_project.yml) variable declarations to see the expected names.
+    
+```yml
+vars:
+    snapchat_ads_<default_source_table_name>_identifier: your_table_name 
+```
     
 ### Change the build schema
 By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:

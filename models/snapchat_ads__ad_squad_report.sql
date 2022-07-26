@@ -35,7 +35,7 @@ with ad_squad_hourly as (
         account.currency,
         sum(ad_squad_hourly.swipes) as swipes,
         sum(ad_squad_hourly.impressions) as impressions,
-        round(sum(ad_squad_hourly.spend)) as spend
+        round(sum(ad_squad_hourly.spend),2) as spend
 
         {% for metric in var('snapchat_ads__ad_squad_hourly_passthrough_metrics', []) %}
         , sum(ad_squad_hourly.{{ metric }}) as {{ metric }}
