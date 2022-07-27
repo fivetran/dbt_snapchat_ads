@@ -6,15 +6,15 @@ config-version: 2
 vars: 
   snapchat_ads_source:
     snapchat_ads_schema: snapchat_ads_integration_tests_3
-    snapchat_ads__ad_account_history_identifier:  "snapchat_ad_account_history_data"
-    snapchat_ads__ad_history_identifier: "snapchat_ad_history_data"
-    snapchat_ads__ad_hourly_report_identifier: "snapchat_ad_hourly_report_data"
-    snapchat_ads__ad_squad_history_identifier: "snapchat_ad_squad_history_data"
-    snapchat_ads__ad_squad_hourly_report_identifier: "snapchat_ad_squad_hourly_report_data"
-    snapchat_ads__campaign_history_identifier: "snapchat_campaign_history_data"
-    snapchat_ads__campaign_hourly_report_identifier: "snapchat_campaign_hourly_report_data"
-    snapchat_ads__creative_history_identifier: "snapchat_creative_history_data"
-    snapchat_ads__creative_url_tag_history_identifier: "snapchat_creative_url_tag_history_data"
+    snapchat_ads_ad_account_history_identifier:  "snapchat_ad_account_history_data"
+    snapchat_ads_ad_history_identifier: "snapchat_ad_history_data"
+    snapchat_ads_ad_hourly_report_identifier: "snapchat_ad_hourly_report_data"
+    snapchat_ads_ad_squad_history_identifier: "snapchat_ad_squad_history_data"
+    snapchat_ads_ad_squad_hourly_report_identifier: "snapchat_ad_squad_hourly_report_data"
+    snapchat_ads_campaign_history_identifier: "snapchat_campaign_history_data"
+    snapchat_ads_campaign_hourly_report_identifier: "snapchat_campaign_hourly_report_data"
+    snapchat_ads_creative_history_identifier: "snapchat_creative_history_data"
+    snapchat_ads_creative_url_tag_history_identifier: "snapchat_creative_url_tag_history_data"
 
 dispatch:
   - macro_namespace: dbt_utils
