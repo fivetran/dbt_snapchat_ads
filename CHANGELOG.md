@@ -1,5 +1,9 @@
 # dbt_snapchat_ads v0.4.0
 PR [#11](https://github.com/fivetran/dbt_snapchat_ads/pull/11) applies the Ad Reporting V2 updates:
+
+## 🚨 Breaking Changes 🚨
+- Changes `snapchat_schema` and `snapchat_database` variable names to `snapchat_ads_schema` and `snapchat_ads_database` 
+- Updates model names to prefix with `snapchat_ads` and removes the `ad_adapter` model and dependencies on it
 ## 🎉 Feature Enhancements 🎉
 
 - Addition of the following new end models. These models were added to provide further flexibility and ensure greater accuracy of your Snapchat Ads reporting. Additionally, these new end models will be leveraged in the respective downstream [dbt_ad_reporting](https://github.com/fivetran/dbt_ad_reporting) models.
@@ -14,10 +18,6 @@ PR [#11](https://github.com/fivetran/dbt_snapchat_ads/pull/11) applies the Ad Re
 - Introduces the identifier variable for all source models
 - Casts all timestamp fields using dbt_utils.type_timestamp() and rounds all monetary fields. 
 - Introduces metrics passthrough capability 
-
-## 🚨 Breaking Changes 🚨
-- Changes `snapchat_schema` and `snapchat_database` variable names to `snapchat_ads_schema` and `snapchat_ads_database` 
-- Updates model names to prefix with `snapchat_ads` and removed the `ad_adapter` model and dependencies on it
 
 # dbt_snapchat_ads v0.3.1
 🎉 Fix creative_id bug [issue]](https://github.com/fivetran/dbt_snapchat_ads/issues/8) 🎉
