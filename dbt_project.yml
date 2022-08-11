@@ -13,6 +13,11 @@ vars:
     ad_squad_hourly_report: "{{ ref('stg_snapchat_ads__ad_squad_hourly_report') }}"
     campaign_history: "{{ ref('stg_snapchat_ads__campaign_history') }}"
     campaign_hourly_report: "{{ ref('stg_snapchat_ads__campaign_hourly_report') }}"
+
+  snapchat_ads__ad_hourly_passthrough_metrics: []
+  snapchat_ads__ad_squad_hourly_passthrough_metrics: []
+  snapchat_ads__campaign_hourly_report_passthrough_metrics: []
+
 models:
   snapchat_ads:
     +schema: snapchat_ads

@@ -28,11 +28,8 @@ with campaign_hourly as (
         sum(campaign_hourly.swipes) as swipes,
         sum(campaign_hourly.impressions) as impressions,
         round(sum(campaign_hourly.spend),2) as spend
-
-        {% for metric in var('snapchat_ads__campaign_hourly_report_passthrough_metrics', []) %}
-        , sum(campaign_hourly.{{ metric }}) as {{ metric }}
-        {% endfor %}
-    
+        
+        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='snapchat_ads__campaign_hourly_report_passthrough_metrics', transform = 'sum') }}
     from campaign_hourly
     left join campaigns
         on campaign_hourly.campaign_id = campaigns.campaign_id
