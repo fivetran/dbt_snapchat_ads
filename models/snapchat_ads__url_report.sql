@@ -1,3 +1,5 @@
+{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true)) }}
+
 with ad_hourly as (
 
     select *
