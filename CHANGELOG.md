@@ -16,8 +16,9 @@ PR [#11](https://github.com/fivetran/dbt_snapchat_ads/pull/11) applies the Ad Re
 
 - Applies README standardization updates
 - Introduces the identifier variable for all source models
-- Casts all timestamp fields using dbt_utils.type_timestamp() and rounds all monetary fields. 
+- Casts all timestamp fields using dbt_utils.type_timestamp() and rounds all monetary fields
 - Introduces metrics passthrough capability 
+- Add enable configs for this specific ad platform, for use in the Ad Reporting rollup package 
 
 # dbt_snapchat_ads v0.3.1
 🎉 Fix creative_id bug [issue]](https://github.com/fivetran/dbt_snapchat_ads/issues/8) 🎉
