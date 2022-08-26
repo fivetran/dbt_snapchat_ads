@@ -1,3 +1,4 @@
+{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true)) }}
 with base as (
 
     select *

@@ -67,15 +67,21 @@ vars:
 
 ## (Optional) Step 4: Additional configurations
 ### Passing Through Additional Metrics
-By default, this package will select the fields from the source tables to pass into the staging models, that are currently shown in the existing staging models. If you would like to pass through additional metrics to the staging models and end models, add the following configuration to your `dbt_project.yml` file:
+By default, this package will select `clicks`, `impressions`, and `cost` from the source reporting tables to store into the staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) if desired, but not required. Use the below format for declaring the respective pass-through variables:
+
+>**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (taps, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
 
 ```yml
 vars:
-  snapchat_ads__ad_hourly_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.ad_hourly_report
-  snapchat_ads__ad_squad_hourly_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.ad_squad_hourly_report
-  snapchat_ads__campaign_hourly_report_passthrough_metrics: ['the', 'list', 'of', 'metric', 'columns', 'to', 'include'] # from snapchat_ads.campaign_hourly_report
+    snapchat_ads__ad_hourly_passthrough_metrics: 
+      - name: "new_custom_field"
+        alias: "custom_field"
+    snapchat_ads__ad_squad_hourly_passthrough_metrics:
+      - name: "this_field"
+    snapchat_ads__campaign_hourly_report_passthrough_metrics:
+      - name: "unique_string_field"
+        alias: "field_id"
 ```
-> Please ensure you use due diligence when adding metrics to these models which will be summed upon aggregation. The metrics added by default have been vetted by the Fivetran team maintaining this package for accuracy.  You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate.
 
 ### Change the source table references
 If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:

@@ -40,6 +40,7 @@ with ad_squad_hourly as (
         round(sum(ad_squad_hourly.spend),2) as spend
         
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='snapchat_ads__ad_squad_hourly_passthrough_metrics', transform = 'sum') }}
+    
     from ad_squad_hourly
     left join ad_squads
         on ad_squad_hourly.ad_squad_id = ad_squads.ad_squad_id

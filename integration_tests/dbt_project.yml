@@ -21,9 +21,8 @@ dispatch:
     search_order: ['spark_utils', 'dbt_utils']
 
 seeds:
-  snapchat_ads_source_integration_tests:
-    +quote_columns: "{{ true if target.type in ('redshift', 'postgres') else false }}"
   snapchat_ads_integration_tests:
+    +quote_columns: "{{ true if target.type in ('redshift', 'postgres') else false }}"
     snapchat_ad_hourly_report_data:
       +column_types:
         date: timestamp
