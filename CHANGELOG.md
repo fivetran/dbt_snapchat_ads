@@ -1,3 +1,35 @@
+# dbt_snapchat_ads v0.4.0
+PR [#11](https://github.com/fivetran/dbt_snapchat_ads/pull/11) applies the Ad Reporting V2 updates:
+
+## 🚨 Breaking Changes 🚨
+- Changes `snapchat_schema` and `snapchat_database` variable names to `snapchat_ads_schema` and `snapchat_ads_database` 
+- Updates model names to prefix with `snapchat_ads` and removes the `ad_adapter` model and dependencies on it
+## 🎉 Feature Enhancements 🎉
+
+- Addition of the following new end models. These models were added to provide further flexibility and ensure greater accuracy of your Snapchat Ads reporting. Additionally, these new end models will be leveraged in the respective downstream [dbt_ad_reporting](https://github.com/fivetran/dbt_ad_reporting) models.
+  - `snapchat_ads__ads_report`
+    - Each record in this table represents the daily performance at the ads level.
+  - `snapchat_ads__creative_report`
+    - Each record in this table represents the daily performance at the campaign level.
+  - `snapchat_ads__url_report`
+    - Each record in this table represents the daily performance at the url level.
+
+- Applies README standardization updates
+- Introduces the identifier variable for all source models
+- Casts all timestamp fields using dbt_utils.type_timestamp() and rounds all monetary fields
+- Inclusion of passthrough metrics:
+  - `snapchat_ads__ad_hourly_passthrough_metrics`
+  - `snapchat_ads__ad_squad_hourly_passthrough_metrics`
+  - `snapchat_ads__campaign_hourly_report_passthrough_metrics`
+> This applies to all passthrough columns within the `dbt_snapchat_ads_source` package and not just the `snapchat_ads__ad_hourly_passthrough_metrics` example.
+```yml
+vars:
+  snapchat_ads__ad_hourly_passthrough_metrics:
+    - name: "my_field_to_include" # Required: Name of the field within the source.
+      alias: "field_alias" # Optional: If you wish to alias the field within the staging model.
+```
+- Add enable configs for this specific ad platform, for use in the Ad Reporting rollup package 
+
 # dbt_snapchat_ads v0.3.1
 🎉 Fix creative_id bug [issue]](https://github.com/fivetran/dbt_snapchat_ads/issues/8) 🎉
 

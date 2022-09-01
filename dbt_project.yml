@@ -1,17 +1,27 @@
 name: 'snapchat_ads'
-version: '0.3.1'
+version: '0.4.0'
 config-version: 2
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 vars:
   snapchat_ads:
-    creative_history: "{{ ref('stg_snapchat__creative_history') }}"
-    creative_url_tag_history: "{{ ref('stg_snapchat__creative_url_tag_history') }}"
-    ad_hourly_report: "{{ ref('stg_snapchat__ad_hourly_report') }}"
-    ad_account_history: "{{ ref('stg_snapchat__ad_account_history') }}"
-    ad_history: "{{ ref('stg_snapchat__ad_history') }}"
-    ad_squad_history: "{{ ref('stg_snapchat__ad_squad_history') }}"
-    campaign_history: "{{ ref('stg_snapchat__campaign_history') }}"
+    creative_history: "{{ ref('stg_snapchat_ads__creative_history') }}"
+    creative_url_tag_history: "{{ ref('stg_snapchat_ads__creative_url_tag_history') }}"
+    ad_hourly_report: "{{ ref('stg_snapchat_ads__ad_hourly_report') }}"
+    ad_account_history: "{{ ref('stg_snapchat_ads__ad_account_history') }}"
+    ad_history: "{{ ref('stg_snapchat_ads__ad_history') }}"
+    ad_squad_history: "{{ ref('stg_snapchat_ads__ad_squad_history') }}"
+    ad_squad_hourly_report: "{{ ref('stg_snapchat_ads__ad_squad_hourly_report') }}"
+    campaign_history: "{{ ref('stg_snapchat_ads__campaign_history') }}"
+    campaign_hourly_report: "{{ ref('stg_snapchat_ads__campaign_hourly_report') }}"
+
+  snapchat_ads__ad_hourly_passthrough_metrics: []
+  snapchat_ads__ad_squad_hourly_passthrough_metrics: []
+  snapchat_ads__campaign_hourly_report_passthrough_metrics: []
+
 models:
   snapchat_ads:
     +schema: snapchat_ads
     +materialized: table
+    intermediate:
+      materialized: ephemeral
+
