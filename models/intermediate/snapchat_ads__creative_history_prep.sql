@@ -30,7 +30,7 @@ with base as (
         base.ad_account_id,
         base.creative_name,
         base.url,
-        {{ dbt_utils.split_part('base.url', "'?'", 1) }} as base_url,
+        {{ dbt.split_part('base.url', "'?'", 1) }} as base_url,
         {{ dbt_utils.get_url_host('base.url') }} as url_host,
         '/' || {{ dbt_utils.get_url_path('base.url') }} as url_path,
         coalesce(url_tags_pivoted.utm_source, {{ dbt_utils.get_url_parameter('base.url', 'utm_source') }}) as utm_source,
