@@ -66,8 +66,8 @@ with ad_hourly as (
     left join account
         on creatives.ad_account_id = account.ad_account_id
 
-    {% if (var('include_snapchat_ads_null_urls', False)) or
-        (var('include_ad_reporting_null_urls', False))  %}
+    {% if (var('allow_snapchat_ads_null_urls', False)) or
+        (var('allow_ad_reporting_null_urls', False))  %}
         -- In this case, skip where clause to include all rows whether or not the url field is populated.
     {% else %}
         -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
