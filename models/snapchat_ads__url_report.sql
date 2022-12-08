@@ -66,8 +66,14 @@ with ad_hourly as (
     left join account
         on creatives.ad_account_id = account.ad_account_id
 
-    -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
-    where creatives.url is not null
+    {% if (var('include_snapchat_ads_null_urls', False)) or
+        (var('include_ad_reporting_null_urls', False))  %}
+        -- In this case, skip where clause to include all rows whether or not the url field is populated.
+    {% else %}
+        -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
+        where creatives.url is not null
+    {% endif %}
+
     {{ dbt_utils.group_by(14) }}
 
 )
