@@ -66,8 +66,11 @@ with ad_hourly as (
     left join account
         on creatives.ad_account_id = account.ad_account_id
 
-    -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
-    where creatives.url is not null
+    {% if var('ad_reporting__url_report__using_null_filter', True) %}
+        -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
+        where creatives.url is not null
+    {% endif %}
+
     {{ dbt_utils.group_by(14) }}
 
 )
