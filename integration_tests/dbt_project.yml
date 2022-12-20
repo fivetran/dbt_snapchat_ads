@@ -1,11 +1,11 @@
 name: 'snapchat_ads_integration_tests'
-version: '0.4.0'
+version: '0.5.0'
 profile: 'integration_tests'
 config-version: 2
 
 vars: 
   snapchat_ads_source:
-    snapchat_ads_schema: snapchat_ads_integration_tests_4
+    snapchat_ads_schema: snapchat_ads_integration_tests_6
     snapchat_ads_ad_account_history_identifier:  "snapchat_ad_account_history_data"
     snapchat_ads_ad_history_identifier: "snapchat_ad_history_data"
     snapchat_ads_ad_hourly_report_identifier: "snapchat_ad_hourly_report_data"
