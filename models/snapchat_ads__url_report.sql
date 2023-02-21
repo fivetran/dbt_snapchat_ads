@@ -43,6 +43,10 @@ with ad_hourly as (
         account.ad_account_name,
         ad_hourly.ad_id,
         ads.ad_name,
+        ad_squads.ad_squad_id,
+        ad_squads.ad_squad_name,
+        campaigns.campaign_id,
+        campaigns.campaign_name,
         account.currency,
         creatives.base_url,
         creatives.url_host,
@@ -63,6 +67,10 @@ with ad_hourly as (
         on ad_hourly.ad_id = ads.ad_id
     left join creatives
         on ads.creative_id = creatives.creative_id
+    left join ad_squads
+        on ads.ad_squad_id = ad_squads.ad_squad_id
+    left join campaigns
+        on ad_squads.campaign_id = campaigns.campaign_id
     left join account
         on creatives.ad_account_id = account.ad_account_id
 
@@ -71,7 +79,7 @@ with ad_hourly as (
         where creatives.url is not null
     {% endif %}
 
-    {{ dbt_utils.group_by(14) }}
+    {{ dbt_utils.group_by(18) }}
 
 )
 

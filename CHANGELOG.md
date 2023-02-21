@@ -1,3 +1,9 @@
+# dbt_snapchat_ads v0.5.1
+## Bug Fixes
+- Add missing columns ad_squad_id, ad_squad_name, campaign_id and campaign_name to `url_report` that were previously available in the <0.3.1 version of this package. ([#14](https://github.com/fivetran/dbt_snapchat_ads/pull/14))
+
+## Contributors
+- [@dumkydewilde](https://github.com/dumkydewilde) ([#14](https://github.com/fivetran/dbt_snapchat_ads/pull/14))
 # dbt_snapchat_ads v0.5.0
 
 ## 🚨 Breaking Changes 🚨:
