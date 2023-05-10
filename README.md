@@ -45,12 +45,13 @@ dispatch:
 ## Step 2: Install the package
 Include the following snapchat_ads_source package version in your `packages.yml` file:
 > TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
-```yaml
+```yml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=0.5.0", "<0.6.0"]
-
+    version: [">=0.5.0", "<0.6.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
+Do NOT include the `snapchat_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
+
 ## Step 3: Configure your variables
 
 ### Define database and schema variables
