@@ -1,3 +1,5 @@
+ADD source_relation WHERE NEEDED + CHECK JOINS AND WINDOW FUNCTIONS! (Delete this line when done.)
+
 {{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true)) }}
 with base as (
 
@@ -41,6 +43,7 @@ with base as (
     from base
     left join url_tags_pivoted
         on base.creative_id = url_tags_pivoted.creative_id
+        and base.source_relation = url_tags_pivoted.source_relation
 
 )
 

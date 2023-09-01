@@ -1,3 +1,5 @@
+ADD source_relation WHERE NEEDED + CHECK JOINS AND WINDOW FUNCTIONS! (Delete this line when done.)
+
 {{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true)) }}
 
 with ad_hourly as (
@@ -33,6 +35,7 @@ with ad_hourly as (
 ), aggregated as (
 
     select
+        ad_hourly.source_relation,
         cast(ad_hourly.date_hour as date) as date_day,
         account.ad_account_id,
         account.ad_account_name,
@@ -46,14 +49,18 @@ with ad_hourly as (
     from ad_hourly
     left join ads 
         on ad_hourly.ad_id = ads.ad_id
+        and ad_hourly.source_relation = ads.source_relation
     left join ad_squads
         on ads.ad_squad_id = ad_squads.ad_squad_id
+        and ads.source_relation = ad_squads.source_relation
     left join campaigns
         on ad_squads.campaign_id = campaigns.campaign_id
+        and ad_squads.source_relation = campaigns.source_relation
     left join account
         on campaigns.ad_account_id = account.ad_account_id
+        and campaigns.source_relation = account.source_relation
 
-    {{ dbt_utils.group_by(4) }}
+    {{ dbt_utils.group_by(5) }}
 
 )
 
