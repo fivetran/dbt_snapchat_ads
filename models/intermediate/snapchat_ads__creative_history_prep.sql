@@ -1,5 +1,3 @@
-ADD source_relation WHERE NEEDED + CHECK JOINS AND WINDOW FUNCTIONS! (Delete this line when done.)
-
 {{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true)) }}
 with base as (
 
@@ -16,6 +14,7 @@ with base as (
 ), url_tags_pivoted as (
 
     select 
+        source_relation,
         creative_id,
         min(case when param_key = 'utm_source' then param_value end) as utm_source,
         min(case when param_key = 'utm_medium' then param_value end) as utm_medium,
@@ -23,11 +22,12 @@ with base as (
         min(case when param_key = 'utm_content' then param_value end) as utm_content,
         min(case when param_key = 'utm_term' then param_value end) as utm_term
     from url_tags
-    group by 1
+    group by 1,2
 
 ), fields as (
 
     select
+        base.source_relation,
         base.creative_id,
         base.ad_account_id,
         base.creative_name,
