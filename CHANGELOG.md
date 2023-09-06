@@ -7,13 +7,11 @@
 - In the source package, updated tmp models to union source data using the `fivetran_utils.union_data` macro. 
 - To distinguish which source each field comes from, added `source_relation` column in each staging and downstream model and applied the `fivetran_utils.source_relation` macro.
 - Updated tests to account for the new `source_relation` column.
-    - The `source_relation` column is included in all joins and window function partition clauses in the transform package. 
+    - The `source_relation` column is included in all joins in the transform package. 
 
-# dbt_snapchat_ads v0.UPDATE.UPDATE
-
- ## Under the Hood:
-- Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job. ([#15](https://github.com/fivetran/dbt_snapchat_ads/pull/15))
-- Updated the pull request [templates](/.github).  ([#15](https://github.com/fivetran/dbt_snapchat_ads/pull/15))
+[PR #15](https://github.com/fivetran/dbt_snapchat_ads/pull/15) includes the following updates:
+- Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
+- Updated the pull request [templates](/.github). 
 
 # dbt_snapchat_ads v0.5.1
 ## Bug Fixes
