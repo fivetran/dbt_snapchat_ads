@@ -64,8 +64,6 @@ vars:
 ```
 
 ## (Optional) Step 4: Additional configurations
-<details><summary>Expand for configurations</summary>
-
 ### Union multiple connectors
 If you have multiple snapchat_ads connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `snapchat_ads_union_schemas` OR `snapchat_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
 
@@ -114,8 +112,6 @@ models:
     snapchat_ads:
       +schema: my_new_schema_name # leave blank for just the target_schema
 ```
-
-</details>
 
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>
