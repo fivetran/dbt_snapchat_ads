@@ -1,8 +1,17 @@
-# dbt_snapchat_ads v0.UPDATE.UPDATE
+# dbt_snapchat_ads v0.6.0
+[PR #19](https://github.com/fivetran/dbt_snapchat_ads/pull/19) includes the following updates:
+## Feature update 🎉
+- Unioning capability! This adds the ability to union source data from multiple snapchat_ads connectors. Refer to the [Union Multiple Connectors README section](https://github.com/fivetran/dbt_snapchat_ads/blob/main/README.md#union-multiple-connectors) for more details.
 
- ## Under the Hood:
-- Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job. ([#15](https://github.com/fivetran/dbt_snapchat_ads/pull/15))
-- Updated the pull request [templates](/.github).  ([#15](https://github.com/fivetran/dbt_snapchat_ads/pull/15))
+## Under the hood 🚘
+- In the source package, updated tmp models to union source data using the `fivetran_utils.union_data` macro. 
+- To distinguish which source each field comes from, added `source_relation` column in each staging and downstream model and applied the `fivetran_utils.source_relation` macro.
+  - The `source_relation` column is included in all joins in the transform package. 
+- Updated tests to account for the new `source_relation` column.
+
+[PR #15](https://github.com/fivetran/dbt_snapchat_ads/pull/15) includes the following updates:
+- Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
+- Updated the pull request [templates](/.github). 
 
 # dbt_snapchat_ads v0.5.1
 ## Bug Fixes

@@ -38,6 +38,7 @@ with ad_hourly as (
 ), aggregated as (
 
     select
+        ad_hourly.source_relation,
         cast(ad_hourly.date_hour as date) as date_day,
         account.ad_account_id,
         account.ad_account_name,
@@ -65,21 +66,26 @@ with ad_hourly as (
     from ad_hourly
     left join ads 
         on ad_hourly.ad_id = ads.ad_id
+        and ad_hourly.source_relation = ads.source_relation
     left join creatives
         on ads.creative_id = creatives.creative_id
+        and ads.source_relation = creatives.source_relation
     left join ad_squads
         on ads.ad_squad_id = ad_squads.ad_squad_id
+        and ads.source_relation = ad_squads.source_relation
     left join campaigns
         on ad_squads.campaign_id = campaigns.campaign_id
+        and ad_squads.source_relation = campaigns.source_relation
     left join account
         on creatives.ad_account_id = account.ad_account_id
+        and creatives.source_relation = account.source_relation
 
     {% if var('ad_reporting__url_report__using_null_filter', True) %}
         -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
         where creatives.url is not null
     {% endif %}
 
-    {{ dbt_utils.group_by(18) }}
+    {{ dbt_utils.group_by(19) }}
 
 )
 
