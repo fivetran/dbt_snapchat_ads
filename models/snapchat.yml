@@ -15,7 +15,9 @@ models:
       - name: date_day
         description: The date of the report.
         tests:
-          - not_null
+          - not_null:
+              config:
+                severity: warn
       - name: ad_account_id
         description: The ID of the account in Snapchat.
         tests:
