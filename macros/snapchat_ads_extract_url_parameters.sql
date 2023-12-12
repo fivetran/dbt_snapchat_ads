@@ -1,6 +1,6 @@
 {% macro snapchat_ads_extract_url_parameter(field, url_parameter) -%}
 
-{{ adapter.dispatch('snapchat_ads_extract_url_parameter', 'snapchat_ads') (field, url_parameter) }}
+{{ return(adapter.dispatch('snapchat_ads_extract_url_parameter', 'snapchat_ads') (field, url_parameter)) }}
 
 {% endmacro %}
 
