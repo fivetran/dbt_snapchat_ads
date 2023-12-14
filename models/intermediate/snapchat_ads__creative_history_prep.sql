@@ -35,11 +35,11 @@ with base as (
         {{ dbt.split_part('base.url', "'?'", 1) }} as base_url,
         {{ dbt_utils.get_url_host('base.url') }} as url_host,
         '/' || {{ dbt_utils.get_url_path('base.url') }} as url_path,
-        coalesce(url_tags_pivoted.utm_source, {{ dbt_utils.get_url_parameter('base.url', 'utm_source') }}) as utm_source,
-        coalesce(url_tags_pivoted.utm_medium, {{ dbt_utils.get_url_parameter('base.url', 'utm_medium') }}) as utm_medium,
-        coalesce(url_tags_pivoted.utm_campaign, {{ dbt_utils.get_url_parameter('base.url', 'utm_campaign') }}) as utm_campaign,
-        coalesce(url_tags_pivoted.utm_content, {{ dbt_utils.get_url_parameter('base.url', 'utm_content') }}) as utm_content,
-        coalesce(url_tags_pivoted.utm_term, {{ dbt_utils.get_url_parameter('base.url', 'utm_term') }}) as utm_term
+        coalesce(url_tags_pivoted.utm_source, {{ snapchat_ads.snapchat_ads_extract_url_parameter('base.url', 'utm_source') }}) as utm_source,
+        coalesce(url_tags_pivoted.utm_medium, {{ snapchat_ads.snapchat_ads_extract_url_parameter('base.url', 'utm_medium') }}) as utm_medium,
+        coalesce(url_tags_pivoted.utm_campaign, {{ snapchat_ads.snapchat_ads_extract_url_parameter('base.url', 'utm_campaign') }}) as utm_campaign,
+        coalesce(url_tags_pivoted.utm_content, {{ snapchat_ads.snapchat_ads_extract_url_parameter('base.url', 'utm_content') }}) as utm_content,
+        coalesce(url_tags_pivoted.utm_term, {{ snapchat_ads.snapchat_ads_extract_url_parameter('base.url', 'utm_term') }}) as utm_term
     from base
     left join url_tags_pivoted
         on base.creative_id = url_tags_pivoted.creative_id
