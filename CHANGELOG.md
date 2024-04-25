@@ -1,5 +1,4 @@
 # dbt_snapchat_ads v0.6.2
-
 ## Bug Fixes
 - Adjust the severity of the `ad_account_id` test to warn. This is required since Snapchat can hard-delete records from the history tables, but not from the reporting tables. This ensures that accurate statistics are being reported and production pipelines aren't failing. ([PR #20](https://github.com/fivetran/dbt_snapchat_ads/pull/20))
 
