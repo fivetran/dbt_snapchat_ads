@@ -10,7 +10,7 @@ If you would like to leverage a report that contains all ads and their daily met
 ## Ad Account Report Metrics Associated with Deleted Entities
 Similar to some other Ad Platforms, Snapchat Ads will hard-delete entities (i.e. ads, ad squads, campaigns, accounts) from their `*_history` tables but retain associated records in their respective `*_hourly_report` tables. This typically does not pose an issue for our `not_null` tests on our end models, as most entities have their own `<entity>_hourly_report` source tables that come with the appropriate entity-level ID. However, `snapchat_ads__account_report` draws from the `ad_hourly_report` table, rolls it up to the account level, and joins in the `ad_account_id` using history tables. Thus, if any ad report record is associated with a deleted ad, campaign, ad squad, or account, the `ad_account_id` will be `null`.
 
-We have opted to keep these records in `snapchat_ads__account_report`, as it may be valuable to know that non-zero ad metrics are associated with deleted entities. However, we have changed the severity of the `not_null` test on `ad_account_id` to be `warn` instead of `error`.
+We have opted to keep these records in `snapchat_ads__account_report`, as it may be valuable to know that non-zero ad metrics are associated with deleted entities (though null-account records will be grouped together). However, we have changed the severity of the `not_null` test on `ad_account_id` to be `warn` instead of `error`.
 
 If you would like to disable this `not_null` test completely to avoid warnings, add the following to your root project `dbt_project.yml`:
 ```yml
