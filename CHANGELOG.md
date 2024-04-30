@@ -1,5 +1,15 @@
-# dbt_snapchat_ads v0.6.1
+# dbt_snapchat_ads v0.6.2
+## Bug Fixes
+- Adjust the severity of the `ad_account_id` test in `snapchat_ads__account_report` to `warn`. This is required since Snapchat can hard-delete records from the history tables, but not from the reporting tables. This ensures that accurate statistics are being reported and production pipelines aren't failing. ([PR #20](https://github.com/fivetran/dbt_snapchat_ads/pull/20))
+  - Documents the above decision in the [DECISIONLOG.md](https://github.com/fivetran/dbt_snapchat_ads/blob/main/DECISIONLOG.md).
 
+## Under the Hood
+- Updated the repo-maintainer PR template to our most up-to-date format ([PR #24](https://github.com/fivetran/dbt_snapchat_ads/pull/24)).
+
+## Contributors
+- [@bthomson22](https://github.com/bthomson22) ([PR #20](https://github.com/fivetran/dbt_snapchat_ads/pull/20))
+
+# dbt_snapchat_ads v0.6.1
 [PR #22](https://github.com/fivetran/dbt_snapchat_ads/pull/22) includes the following updates:
 ## Bug Fixes
 - This package now leverages the new `snapchat_ads_extract_url_parameter()` macro for use in parsing out url parameters. This was added to create special logic for Databricks instances not supported by `dbt_utils.get_url_parameter()`.
