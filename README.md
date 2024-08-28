@@ -16,16 +16,21 @@
 - Generates a comprehensive data dictionary of your source and modeled Snapchat Ads data through the [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/).
 - Enables you to better understand your marketing performance based on different levels of granularity:
 
-The following table provides a detailed list of all models materialized within this package by default.
-> TIP: See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/#!/overview?g_v=1&g_e=seeds).
+<!--section=“snapchat_ads_transformation_model"-->
 
-| **Model**                    | **Description**                                                                                                        |
+The following table provides a detailed list of all tables materialized within this package by default.
+> TIP: See more details about these tables in the package's [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/#!/overview?g_v=1&g_e=seeds).
+
+| **Table**                    | **Description**                                                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [snapchat_ads__account_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__account_report)     | Each record represents the daily ad performance of each account.                                                       |
 | [snapchat_ads__campaign_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_report)    | Each record represents the daily ad performance of each campaign.                                                      |
 | [snapchat_ads__ad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_report)          | Each record represents the daily ad performance of each ad.                                                            |
 | [snapchat_ads__url_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__url_report)         | Each record represents the daily ad performance of each ad url.                                                           |
 | [snapchat_ads__ad_squad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report)    | Each record represents the daily ad performance of each ad squad.
+
+<!--section-end-->
+
 ## How do I use the dbt package?
 
 ### Step 1: Prerequisites
