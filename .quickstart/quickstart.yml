@@ -8,3 +8,11 @@ destination_configurations:
     dispatch:
       - macro_namespace: dbt_utils
         search_order: [ 'spark_utils', 'dbt_utils' ]
+
+public_models: [
+  "snapchat_ads__ad_report",
+  "snapchat_ads__url_report",
+  "snapchat_ads__account_report",
+  "snapchat_ads__ad_squad_report",
+  "snapchat_ads__campaign_report"
+]
