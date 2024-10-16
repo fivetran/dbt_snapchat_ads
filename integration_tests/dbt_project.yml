@@ -1,5 +1,5 @@
 name: 'snapchat_ads_integration_tests'
-version: '0.6.2'
+version: '0.7.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -19,6 +19,9 @@ vars:
 dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
+
+models:
+  +schema: "snapchat_ads_{{ var('directed_schema','dev') }}"
 
 seeds:
   snapchat_ads_integration_tests:
