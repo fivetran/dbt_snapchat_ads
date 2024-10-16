@@ -1,5 +1,5 @@
 # dbt_snapchat_ads v0.7.0
-[PR #40](https://github.com/fivetran/dbt_snapchat_ads/pull/40) includes the following updates:
+[PR #28](https://github.com/fivetran/dbt_snapchat_ads/pull/28) includes the following updates:
 
 ## Feature Updates: Conversion Support!
 We have added more robust support for conversions in our data models by doing the following: 
