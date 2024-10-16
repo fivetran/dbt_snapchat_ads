@@ -2,7 +2,12 @@
 
 with campaign_hourly as (
 
-    select *
+    select *,
+        {% if var('snapchat_ads__conversion_fields', none) %}
+            {{ var('snapchat_ads__conversion_fields') | join(' + ') }} as total_conversions
+        {% else %}
+            0 as total_conversions
+        {% endif %}
     from {{ var('campaign_hourly_report') }}
 
 ), account as (
@@ -30,7 +35,11 @@ with campaign_hourly as (
         account.currency,
         sum(campaign_hourly.swipes) as swipes,
         sum(campaign_hourly.impressions) as impressions,
-        round(sum(campaign_hourly.spend),2) as spend
+        round(sum(campaign_hourly.spend),2) as spend,
+        sum(campaign_hourly.total_conversions) as total_conversions,
+        sum(coalesce(campaign_hourly.conversion_purchases_value, 0)) as conversion_purchases_value
+
+        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__conversion_fields', transform='sum', coalesce_with=0, except_variable='snapchat_ads__campaign_hourly_report_passthrough_metrics', exclude_fields=['conversion_purchases_value']) }}
         
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='snapchat_ads__campaign_hourly_report_passthrough_metrics', transform = 'sum') }}
     

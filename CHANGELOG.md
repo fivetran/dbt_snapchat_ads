@@ -1,3 +1,22 @@
+# dbt_snapchat_ads v0.7.0
+[PR #40](https://github.com/fivetran/dbt_snapchat_ads/pull/40) includes the following updates:
+
+## Feature Updates: Conversion Support!
+We have added more robust support for conversions in our data models by doing the following: 
+- Adds a `conversion_purchases_value` field to each `_report` end model, representing the value of conversions that occurred on each day for each account,  ad, ad squad, campaign and url.
+  - Set current variable defaults in the `dbt_project.yml` to bring in the most used conversion field `conversion_purchases` by default.
+- Adds a `total_conversions` metric in our end models to track all conversions being brought in by the `snapchat_ads_conversion_fields` variable.
+> **IMPORTANT**: The above new field additions are **breaking changes**.
+
+## Documentation Update 
+- Documents how to set your own passthrough fields with the variable `snapchat_ads__conversion_fields` [in the README](https://github.com/fivetran/dbt_snapchat/blob/main/README.md#adding-in-conversion-fields-variable).
+
+## Under the Hood
+- Added a new [version](https://github.com/fivetran/dbt_snapchat_ads/blob/main/macros/snapchat_ads_persist_pass_through_columns.sql) of the `persist_pass_through_columns()` [macro](https://github.com/fivetran/dbt_fivetran_utils/blob/v0.4.10/macros/persist_pass_through_columns.sql) in which we can include `coalesces` and properly check between conversion field values and the existing passthrough column.
+
+## Contributors
+- [Seer Interactive](https://www.seerinteractive.com/?utm_campaign=Fivetran%20%7C%20Models&utm_source=Fivetran&utm_medium=Fivetran%20Documentation)
+
 # dbt_snapchat_ads v0.6.2
 ## Bug Fixes
 - Adjust the severity of the `ad_account_id` test in `snapchat_ads__account_report` to `warn`. This is required since Snapchat can hard-delete records from the history tables, but not from the reporting tables. This ensures that accurate statistics are being reported and production pipelines aren't failing. ([PR #20](https://github.com/fivetran/dbt_snapchat_ads/pull/20))

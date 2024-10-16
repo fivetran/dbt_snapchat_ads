@@ -1,11 +1,11 @@
 name: 'snapchat_ads_integration_tests'
-version: '0.6.2'
+version: '0.7.0'
 profile: 'integration_tests'
 config-version: 2
 
 vars: 
   snapchat_ads_source:
-    snapchat_ads_schema: snapchat_ads_integration_tests_6
+    snapchat_ads_schema: snapchat_ads_integration_tests_5
     snapchat_ads_ad_account_history_identifier:  "snapchat_ad_account_history_data"
     snapchat_ads_ad_history_identifier: "snapchat_ad_history_data"
     snapchat_ads_ad_hourly_report_identifier: "snapchat_ad_hourly_report_data"
@@ -19,6 +19,9 @@ vars:
 dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
+
+models:
+  +schema: "snapchat_ads_{{ var('directed_schema','dev') }}"
 
 seeds:
   snapchat_ads_integration_tests:

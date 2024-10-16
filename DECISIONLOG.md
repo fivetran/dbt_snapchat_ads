@@ -5,7 +5,7 @@ An ad can be associated with multiple ad squads and therefore multiple campaigns
 ## UTM Filtering
 This package contains a `snapchat_ads__url_report` which provides daily metrics for your utm compatible ads. It is important to note that not all Ads leverage utm parameters. Therefore, this package takes an opinionated approach to filter out any records that do not contain utm parameters or leverage a url within the ad.
 
-If you would like to leverage a report that contains all ads and their daily metrics, I would suggest you leverage the snpapchat_ads__ad_report which does not apply any filtering.
+If you would like to leverage a report that contains all ads and their daily metrics, I would suggest you leverage the `snapchat_ads__ad_report` which does not apply any filtering.
 
 ## Ad Account Report Metrics Associated with Deleted Entities
 Similar to some other Ad Platforms, Snapchat Ads will hard-delete entities (i.e. ads, ad squads, campaigns, accounts) from their `*_history` tables but retain associated records in their respective `*_hourly_report` tables. This typically does not pose an issue for our `not_null` tests on our end models, as most entities have their own `<entity>_hourly_report` source tables that come with the appropriate entity-level ID. However, `snapchat_ads__account_report` draws from the `ad_hourly_report` table, rolls it up to the account level, and joins in the `ad_account_id` using history tables. Thus, if any ad report record is associated with a deleted ad, campaign, ad squad, or account, the `ad_account_id` will be `null`.
