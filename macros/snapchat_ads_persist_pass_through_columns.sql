@@ -4,6 +4,7 @@
 
 {% set except_fields = [] %}
 {% if except_variable is not none %}
+    {# Start creating list of fields to exclude #}
     {% for item in var(except_variable) %}
         {% do except_fields.append(item.name) %}
     {% endfor %}

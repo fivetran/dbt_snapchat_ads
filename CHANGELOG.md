@@ -1,18 +1,22 @@
 # dbt_snapchat_ads v0.7.0
-[PR #28](https://github.com/fivetran/dbt_snapchat_ads/pull/28) includes the following updates:
+[PR #28](https://github.com/fivetran/dbt_snapchat_ads/pull/28) includes the following **BREAKING CHANGE** updates:
 
-## Feature Updates: Conversion Support!
-We have added more robust support for conversions in our data models by doing the following: 
-- Adds a `conversion_purchases_value` field to each `_report` end model, representing the value of conversions that occurred on each day for each account,  ad, ad squad, campaign and url.
-  - Set current variable defaults in the `dbt_project.yml` to bring in the most used conversion field `conversion_purchases` by default.
-- Adds a `total_conversions` metric in our end models to track all conversions being brought in by the `snapchat_ads_conversion_fields` variable.
-> **IMPORTANT**: The above new field additions are **breaking changes**.
+## Feature Updates: Conversion Support
+We have added more robust support for conversions in our data models by doing the following:
+
+- Added a `conversion_purchases_value` field to each `_report` end model, representing the value of conversions that occurred on each day for each account,  ad, ad squad, campaign and url in your Ad Account's currency.
+- Introduced the `snapchat_ads_conversion_fields` variable to configure which conversion fields (reflecting the total number of conversions) to include in each end model.
+  - By default, `snapchat_ads_conversion_fields` will include the most commonly used conversion field, `conversion_purchases`. See [README](https://github.com/fivetran/dbt_snapchat_ads/tree/main?tab=readme-ov-file#configuring-conversion-fields) for details on how to configure this variable to include other conversion events.
+  - The individual conversion fields specified by `snapchat_ads_conversion_fields` are summed together into a `total_conversions` field in each end model as well.
+> **IMPORTANT**: The above new field additions are **breaking changes** for users who were not already bringing in conversion fields via passthrough columns.
 
 ## Documentation Update 
-- Documents how to set your own passthrough fields with the variable `snapchat_ads__conversion_fields` [in the README](https://github.com/fivetran/dbt_snapchat/blob/main/README.md#adding-in-conversion-fields-variable).
+- Documented how to use the new `snapchat_ads__conversion_fields` variable [here](https://github.com/fivetran/dbt_snapchat_ads/tree/main?tab=readme-ov-file#configuring-conversion-fields).
+- Documented new default conversion fields in yml.
 
 ## Under the Hood
 - Added a new [version](https://github.com/fivetran/dbt_snapchat_ads/blob/main/macros/snapchat_ads_persist_pass_through_columns.sql) of the `persist_pass_through_columns()` [macro](https://github.com/fivetran/dbt_fivetran_utils/blob/v0.4.10/macros/persist_pass_through_columns.sql) in which we can include `coalesces` and properly check between conversion field values and the existing passthrough column.
+- Added data validation tests to verify this release.
 
 ## Contributors
 - [Seer Interactive](https://www.seerinteractive.com/?utm_campaign=Fivetran%20%7C%20Models&utm_source=Fivetran&utm_medium=Fivetran%20Documentation)
