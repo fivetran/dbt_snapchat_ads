@@ -47,7 +47,7 @@ with ad_hourly as (
         sum(ad_hourly.impressions) as impressions,
         round(sum(ad_hourly.spend),2) as spend,
         sum(ad_hourly.total_conversions) as total_conversions,
-        round(sum(ad_hourly.conversion_purchases_value), 2) as conversion_purchases_value
+        round(cast(sum(ad_hourly.conversion_purchases_value) as {{ dbt.type_numeric() }}), 2) as conversion_purchases_value
 
         {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__conversion_fields', transform='sum', coalesce_with=0, except_variable='snapchat_ads__ad_hourly_passthrough_metrics', exclude_fields=['conversion_purchases_value']) }}
 
