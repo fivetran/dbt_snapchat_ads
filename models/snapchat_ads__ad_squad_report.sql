@@ -49,8 +49,8 @@ with ad_squad_hourly as (
 
         {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__conversion_fields', transform='sum', coalesce_with=0, except_variable='snapchat_ads__ad_squad_hourly_passthrough_metrics', exclude_fields=['conversion_purchases_value']) }}
         
-        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='snapchat_ads__ad_squad_hourly_passthrough_metrics', transform = 'sum') }}
-    
+        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__ad_squad_hourly_passthrough_metrics', transform='sum', exclude_fields=['conversion_purchases_value']) }}
+
     from ad_squad_hourly
     left join ad_squads
         on ad_squad_hourly.ad_squad_id = ad_squads.ad_squad_id
