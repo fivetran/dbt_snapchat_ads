@@ -2,7 +2,12 @@
 
 with ad_squad_hourly as (
 
-    select *
+    select *,
+        {% if var('snapchat_ads__conversion_fields', none) %}
+            {{ var('snapchat_ads__conversion_fields') | join(' + ') }} as total_conversions
+        {% else %}
+            0 as total_conversions
+        {% endif %}
     from {{ var('ad_squad_hourly_report') }}
 
 ), account as (
@@ -38,10 +43,14 @@ with ad_squad_hourly as (
         account.currency,
         sum(ad_squad_hourly.swipes) as swipes,
         sum(ad_squad_hourly.impressions) as impressions,
-        round(sum(ad_squad_hourly.spend),2) as spend
+        round(sum(ad_squad_hourly.spend),2) as spend,
+        sum(ad_squad_hourly.total_conversions) as total_conversions,
+        round(cast(sum(ad_squad_hourly.conversion_purchases_value) as {{ dbt.type_numeric() }}), 2) as conversion_purchases_value
+
+        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__conversion_fields', transform='sum', coalesce_with=0, except_variable='snapchat_ads__ad_squad_hourly_passthrough_metrics', exclude_fields=['conversion_purchases_value']) }}
         
-        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='snapchat_ads__ad_squad_hourly_passthrough_metrics', transform = 'sum') }}
-    
+        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__ad_squad_hourly_passthrough_metrics', transform='sum', exclude_fields=['conversion_purchases_value']) }}
+
     from ad_squad_hourly
     left join ad_squads
         on ad_squad_hourly.ad_squad_id = ad_squads.ad_squad_id
