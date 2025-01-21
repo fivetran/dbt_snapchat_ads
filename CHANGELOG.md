@@ -1,3 +1,16 @@
+# dbt_snapchat_ads v0.8.0
+
+[PR #31](https://github.com/fivetran/dbt_snapchat_ads/pull/32)
+
+## Feature Updates: Ad Squad and Campaign References in Ad Report
+Added four columns to snapchat_ads__ad_report
+- ad_squad_id
+- ad_squad_name
+- campaign_id
+- campaign_name
+
+These columns reference the most recent rows in the corresponding `history` tables.
+
 # dbt_snapchat_ads v0.7.0
 [PR #28](https://github.com/fivetran/dbt_snapchat_ads/pull/28) includes the following **BREAKING CHANGE** updates:
 

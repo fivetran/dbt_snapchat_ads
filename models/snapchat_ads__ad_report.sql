@@ -40,7 +40,7 @@ with ad_hourly as (
     where is_most_recent_record = true
 
 
-) aggregated as (
+), aggregated as (
 
     select
         ad_hourly.source_relation,
