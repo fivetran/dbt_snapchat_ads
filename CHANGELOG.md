@@ -1,3 +1,9 @@
+# dbt_snapchat_ads version.version
+
+## Documentation
+- Added Quickstart model counts to README. ([#30](https://github.com/fivetran/dbt_snapchat_ads/pull/30))
+- Corrected references to connectors and connections in the README. ([#30](https://github.com/fivetran/dbt_snapchat_ads/pull/30))
+
 # dbt_snapchat_ads v0.7.0
 [PR #28](https://github.com/fivetran/dbt_snapchat_ads/pull/28) includes the following **BREAKING CHANGE** updates:
 
