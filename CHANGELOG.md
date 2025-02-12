@@ -1,15 +1,21 @@
 # dbt_snapchat_ads v0.8.0
+This release introduces the following updates:
 
-[PR #31](https://github.com/fivetran/dbt_snapchat_ads/pull/32)
+## Breaking Changes
+- Adds ad squad and campaign details to the `snapchat_ads__ad_report` model, so that they can eventually be incorporated in the `dbt_ad_reporting` package for the `ad_reporting__ad_report` model.  ([#33](https://github.com/fivetran/dbt_snapchat_ads/pull/33))
+- Fields added include:
+  - `ad_squad_id`
+  - `ad_squad_name`
+  - `campaign_id`
+  - `campaign_name`
 
-## Feature Updates: Ad Squad and Campaign References in Ad Report
-Added four columns to snapchat_ads__ad_report
-- ad_squad_id
-- ad_squad_name
-- campaign_id
-- campaign_name
+## Documentation
+- Added Quickstart model counts to README. ([#30](https://github.com/fivetran/dbt_snapchat_ads/pull/30))
+- Corrected references to connectors and connections in the README. ([#30](https://github.com/fivetran/dbt_snapchat_ads/pull/30))
+- Updated `snapchat.yml` with new above field additions. ([#33](https://github.com/fivetran/dbt_snapchat_ads/pull/33))
 
-These columns reference the most recent rows in the corresponding `history` tables.
+## Contributors
+- [@JeremyDOwens](https://github.com/JeremyDOwens) ([#32](https://github.com/fivetran/dbt_snapchat_ads/pull/32))
 
 # dbt_snapchat_ads v0.7.0
 [PR #28](https://github.com/fivetran/dbt_snapchat_ads/pull/28) includes the following **BREAKING CHANGE** updates:
