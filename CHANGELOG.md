@@ -9,6 +9,10 @@ This release introduces the following updates:
   - `campaign_id`
   - `campaign_name`
 
+## Under The Hood
+- Updated the tests to include `ad_squad_id` and `campaign_id` in `snapchat.yml` for `snapchat_ads__ad_report` and `snapchat_ads__url_report` to more closely align with other ad reporting packages.  ([#33](https://github.com/fivetran/dbt_snapchat_ads/pull/33))
+- Added integrity test to ensure the `snapchat_ads__ad_report` maintains the same row grain count for `ad_id` and `date_day` betweens the source and end models. ([#33](https://github.com/fivetran/dbt_snapchat_ads/pull/33))
+
 ## Documentation
 - Added Quickstart model counts to README. ([#30](https://github.com/fivetran/dbt_snapchat_ads/pull/30))
 - Corrected references to connectors and connections in the README. ([#30](https://github.com/fivetran/dbt_snapchat_ads/pull/30))

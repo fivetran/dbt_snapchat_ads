@@ -46,6 +46,8 @@ models:
           combination_of_columns:
             - source_relation
             - ad_id
+            - ad_squad_id
+            - campaign_id
             - date_day
     columns:
       - name: source_relation
@@ -179,6 +181,8 @@ models:
           combination_of_columns:
             - source_relation
             - ad_id
+            - ad_squad_id
+            - campaign_id
             - date_day
           config:
             # Below is so we don't run this test if the user has allowed urls to have null entries
