@@ -55,7 +55,7 @@ If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_repor
 ```yml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=0.7.0", "<0.8.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.8.0", "<0.9.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 Do NOT include the `snapchat_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
