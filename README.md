@@ -1,4 +1,5 @@
-<p align="center">
+# Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_snapchat_ads/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -10,7 +11,6 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
 ## What does this dbt package do?
 - Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/snapchat-ads) in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/snapchat-ads#schemainformation) and builds off the output of our [Snapchat Ads source package](https://github.com/fivetran/dbt_snapchat_ads_source).
 - Generates a comprehensive data dictionary of your source and modeled Snapchat Ads data through the [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/).
@@ -30,7 +30,7 @@ The following table provides a detailed list of all tables materialized within t
 | [snapchat_ads__ad_squad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report)    | Each record represents the daily ad performance of each ad squad.
 
 ### Materialized Models
-Each Quickstart transformation job run materializes 23 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
+Each Quickstart transformation job run materializes 29 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
 <!--section-end-->
 
 ## How do I use the dbt package?
@@ -161,7 +161,7 @@ This dbt package is dependent on the following dbt packages. These dependencies 
 ```yml
 packages:
     - package: fivetran/snapchat_ads_source
-      version: [">=0.7.0", "<0.8.0"]
+      version: [">=0.8.0", "<0.9.0"]
 
     - package: fivetran/fivetran_utils
       version: [">=0.4.0", "<0.5.0"]
