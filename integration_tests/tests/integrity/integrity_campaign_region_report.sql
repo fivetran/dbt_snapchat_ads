@@ -1,6 +1,7 @@
 {{ config(
         tag="fivetran_validations",
-        enabled=var('fivetran_validation_tests_enabled', false)
+        enabled=var('fivetran_validation_tests_enabled', false) and
+        var('snapchat__using_campaign_country_report', false)
 ) }}
 
 with source as (
