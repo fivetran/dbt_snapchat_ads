@@ -19,6 +19,7 @@ vars:
   snapchat_ads__ad_hourly_passthrough_metrics: []
   snapchat_ads__ad_squad_hourly_passthrough_metrics: []
   snapchat_ads__campaign_hourly_report_passthrough_metrics: []
+  snapchat_ads__campaign_daily_report_passthrough_metrics: []
   snapchat_ads__conversion_fields: ['conversion_purchases']
 models:
   snapchat_ads:
