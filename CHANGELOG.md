@@ -1,3 +1,18 @@
+# dbt_snapchat_ads v0.9.0
+[PR #34](https://github.com/fivetran/dbt_snapchat_ads/pull/34) introduces the following updates:
+
+## Breaking Changes
+- Introduces two new campaign-based models to the package:
+  - [snapchat_ads__campaign_country_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_country_report)    | Each record represents the daily ad performance of each campaign per country.
+  - [snapchat_ads__campaign_region_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_region_report)    | Each record represents the daily ad performance of each campaign per region.
+- Please note these will be disabled by default. In order to materialize these, add the following configuration to your root `dbt_project.yml` file:
+
+    ```yml
+    vars:
+        snapchat__using_campaign_country_report: true # Necessary for the snapchat_ads__campaign_country_report model. False by default. Requires the campaign_geo_country_daily_report
+        snapchat__using_campaign_region_report: true # Necessary for the snapchat_ads__campaign_region_report model. False by default. Requires the campaign_geo_region_daily_report
+    ```
+
 # dbt_snapchat_ads v0.8.0
 This release introduces the following updates:
 

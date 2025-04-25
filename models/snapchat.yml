@@ -249,7 +249,7 @@ models:
         description: The total conversions being brought in the conversion fields you select in your `snapchat_ads__conversion_fields`.
 
   - name: snapchat_ads__campaign_country_report
-    description: Each record represents the daily performance of a Snapchat campaign.
+    description: Each record represents the daily performance of a Snapchat campaign per country.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -313,7 +313,7 @@ models:
 
 
   - name: snapchat_ads__campaign_region_report
-    description: Each record represents the daily performance of a Snapchat campaign.
+    description: Each record represents the daily performance of a Snapchat campaign per region.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:

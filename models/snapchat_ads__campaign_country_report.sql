@@ -49,9 +49,9 @@ with campaign_daily as (
         sum(campaign_daily.total_conversions) as total_conversions,
         round(cast(sum(campaign_daily.conversion_purchases_value) as {{ dbt.type_numeric() }}), 2) as conversion_purchases_value
 
-        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__conversion_fields', transform='sum', coalesce_with=0, except_variable='snapchat_ads__campaign_daily_report_passthrough_metrics', exclude_fields=['conversion_purchases_value']) }}
+        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__conversion_fields', transform='sum', coalesce_with=0, except_variable='snapchat_ads__campaign_daily_country_report_passthrough_metrics', exclude_fields=['conversion_purchases_value']) }}
         
-        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__campaign_daily_report_passthrough_metrics', transform='sum', exclude_fields=['conversion_purchases_value']) }}
+        {{ snapchat_ads_persist_pass_through_columns(pass_through_variable='snapchat_ads__campaign_daily_country_report_passthrough_metrics', transform='sum', exclude_fields=['conversion_purchases_value']) }}
 
     from campaign_daily
     left join campaigns
