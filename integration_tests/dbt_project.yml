@@ -4,8 +4,8 @@ profile: 'integration_tests'
 config-version: 2
 
 vars:
-  # snapchat__using_campaign_country_report: true # enable for docs
-  # snapchat__using_campaign_region_report: true # enable for docs
+  # snapchat_ads__using_campaign_country_report: true # enable for docs
+  # snapchat_ads__using_campaign_region_report: true # enable for docs
   snapchat_ads_source:
     snapchat_ads_schema: snapchat_ads_integration_tests_6
     snapchat_ads_ad_account_history_identifier:  "snapchat_ad_account_history_data"
