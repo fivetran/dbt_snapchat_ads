@@ -298,7 +298,7 @@ models:
         description: The total value of purchases for the campaign on the given day.
       - name: created_at
         description: Timestamp of when the campaign was created.
-      - name: daily_budget
+      - name: campaign_daily_budget
         description: Daily spend cap for the campaign (converted from microcurrency).
       - name: start_time
         description: The start time of the campaign.
@@ -308,7 +308,7 @@ models:
         description: Campaign status (e.g., ACTIVE, PAUSED, ARCHIVED).
       - name: objective
         description: The objective of the campaign (e.g., BRAND_AWARENESS, APP_INSTALL, etc.).
-      - name: lifetime_spend_cap
+      - name: campaign_lifetime_spend_cap
         description: Lifetime spend cap for the campaign (converted from microcurrency).
 
 
@@ -362,7 +362,7 @@ models:
         description: The total value of purchases for the campaign on the given day.
       - name: created_at
         description: Timestamp of when the campaign was created.
-      - name: daily_budget
+      - name: campaign_daily_budget
         description: Daily spend cap for the campaign (converted from microcurrency).
       - name: start_time
         description: The start time of the campaign.
@@ -372,5 +372,5 @@ models:
         description: Campaign status (e.g., ACTIVE, PAUSED, ARCHIVED).
       - name: objective
         description: The objective of the campaign (e.g., BRAND_AWARENESS, APP_INSTALL, etc.).
-      - name: lifetime_spend_cap
+      - name: campaign_lifetime_spend_cap
         description: Lifetime spend cap for the campaign (converted from microcurrency).

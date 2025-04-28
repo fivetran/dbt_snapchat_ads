@@ -31,7 +31,7 @@ model as (
         sum(saves) as saves,
         sum(conversion_purchases_value) as conversion_purchases_value
     from {{ ref('snapchat_ads__campaign_region_report') }}
-    group by 1,2,3,4
+    group by 1,2
 ),
 
 final as (
@@ -48,8 +48,8 @@ final as (
         model.shares as model_shares,
         source.saves as source_saves,
         model.saves as model_saves,
-        source.conversion_purchases_value as conversion_purchases_value,
-        model.conversion_purchases_value as conversion_purchases_value
+        source.conversion_purchases_value as source_conversion_purchases_value,
+        model.conversion_purchases_value as model_conversion_purchases_value
     from source 
     full outer join model
         on source.campaign_id = model.campaign_id
@@ -63,5 +63,5 @@ where
     or abs(source_swipes - model_swipes) > .0001
     or abs(source_impressions - model_impressions) > .0001
     or abs(source_shares - model_shares) > .0001
-    or abs(source_saves - model_source_saves) > .0001
+    or abs(source_saves - model_saves) > .0001
     or abs(source_conversion_purchases_value - model_conversion_purchases_value) > .0001
