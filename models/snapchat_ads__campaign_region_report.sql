@@ -1,4 +1,4 @@
-{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true) and var('snapchat__using_campaign_region_report', false)) }}
+{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true) and var('snapchat_ads__using_campaign_region_report', false)) }}
 
 with campaign_daily as (
 
@@ -44,6 +44,8 @@ with campaign_daily as (
         sum(campaign_daily.swipes) as swipes,
         sum(campaign_daily.impressions) as impressions,
         round(sum(campaign_daily.spend),2) as spend,
+        sum(campaign_daily.shares) as shares,
+        sum(campaign_daily.saves) as saves,
         sum(campaign_daily.total_conversions) as total_conversions,
         round(cast(sum(campaign_daily.conversion_purchases_value) as {{ dbt.type_numeric() }}), 2) as conversion_purchases_value
 

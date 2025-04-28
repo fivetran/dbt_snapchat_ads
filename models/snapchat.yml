@@ -125,7 +125,7 @@ models:
       - name: conversion_purchases
         description: The total number of purchases for the campaign on the given day.
       - name: conversion_purchases_value
-        description: The total value of purchases for campaign campaign on the given day.
+        description: The total value of purchases for campaign on the given day.
       - name: total_conversions
         description: The total conversions being brought in the conversion fields you select in your `snapchat_ads__conversion_fields`.
 
@@ -319,6 +319,7 @@ models:
           combination_of_columns:
             - source_relation
             - campaign_id
+            - region
             - date_day
     columns:
       - name: source_relation

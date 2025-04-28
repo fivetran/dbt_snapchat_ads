@@ -81,8 +81,8 @@ For certain models, we have disabled them by default because of a smaller percen
 
 ```yml
 vars:
-    snapchat__using_campaign_country_report: true # false by default. Requires the campaign_geo_country_daily_report
-    snapchat__using_campaign_region_report: true # false by default. Requires the campaign_geo_region_daily_report
+    snapchat_ads__using_campaign_country_report: true # false by default. Requires the campaign_geo_country_daily_report
+    snapchat_ads__using_campaign_region_report: true # false by default. Requires the campaign_geo_region_daily_report
 ```
 
 #### Union multiple connections
