@@ -81,8 +81,8 @@ For certain models, we have disabled them by default because of a smaller percen
 
 ```yml
 vars:
-    snapchat_ads__using_campaign_country_report: true # false by default. Requires the campaign_geo_country_daily_report
-    snapchat_ads__using_campaign_region_report: true # false by default. Requires the campaign_geo_region_daily_report
+    snapchat_ads__using_campaign_country_report: true # Enables the snapchat_ads__campaign_country_report model. False by default. Requires the campaign_geo_country_daily_report source table.
+    snapchat_ads__using_campaign_region_report: true # Enables the snapchat_ads__campaign_region_report. False by default. Requires the campaign_geo_region_daily_report source table.
 ```
 
 #### Union multiple connections
@@ -115,9 +115,9 @@ vars:
     snapchat_ads__campaign_hourly_report_passthrough_metrics:
       - name: "unique_string_field"
         alias: "field_id"
-    snapchat_ads__campaign_daily_country_report_passthrough_metrics:
+    snapchat_ads__campaign_daily_country_report_passthrough_metrics: # sources from the campaign_geo_country_daily_report table. Persists through to snapchat_ads__campaign_country_report.
       - name: "new_measure_country_report"
-    snapchat_ads__campaign_daily_region_report_passthrough_metrics:
+    snapchat_ads__campaign_daily_region_report_passthrough_metrics: # sources from the campaign_geo_region_daily_report table. Persists through to snapchat_ads__campaign_region_report.
       - name: "new_measure_region_report"
 ```
 
