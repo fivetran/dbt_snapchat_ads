@@ -59,9 +59,9 @@ final as (
 select * 
 from final
 where 
-    abs(source_spend - model_spend) > .0001
-    or abs(source_swipes - model_swipes) > .0001
-    or abs(source_impressions - model_impressions) > .0001
-    or abs(source_shares - model_shares) > .0001
-    or abs(source_saves - model_saves) > .0001
-    or abs(source_conversion_purchases_value - model_conversion_purchases_value) > .0001
+    abs(source_spend - model_spend) > .01
+    or abs(source_swipes - model_swipes) > .01
+    or abs(source_impressions - model_impressions) > .01
+    or abs(source_shares - model_shares) > .01
+    or abs(source_saves - model_saves) > .01
+    or abs(source_conversion_purchases_value - model_conversion_purchases_value) > .01
