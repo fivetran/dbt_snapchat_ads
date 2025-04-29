@@ -149,7 +149,7 @@ vars:
 ```
     
 #### Change the build schema
-By default, this package builds the Snapchat Ads staging models (9 views, 9 tables) within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models (5 tables) within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
+By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 models:
