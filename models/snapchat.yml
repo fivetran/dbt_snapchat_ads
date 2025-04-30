@@ -25,17 +25,17 @@ models:
       - name: ad_account_name
         description: The name of the account in Snapchat.
       - name: currency
-        description: The current used by the account in Snapchat.
+        description: The currency used by the account in Snapchat.
       - name: spend
-        description: The spend on the ad in the given day.
+        description: The spend for the account on the given day.
       - name: impressions
-        description: The number of impressions the ad had on the given day.
+        description: The number of impressions for the account on the given day.
       - name: swipes
-        description: The number of swipes the ad had on the given day.
+        description: The number of swipes for the account on the given day.
       - name: conversion_purchases
-        description: The total number of purchases for an ad on the given day.
+        description: The total number of purchases for the account on the given day.
       - name: conversion_purchases_value
-        description: The total value of purchases for an ad on the given day.
+        description: The total value of purchases for the account on the given day.
       - name: total_conversions
         description: The total conversions being brought in the conversion fields you select in your `snapchat_ads__conversion_fields`.
 
@@ -75,7 +75,7 @@ models:
       - name: campaign_name
         description: The name of the campaign in Snapchat.
       - name: currency
-        description: The current used by the account in Snapchat.
+        description: The currency used by the account in Snapchat.
       - name: spend
         description: The spend on the ad in the given day.
       - name: impressions
@@ -115,7 +115,7 @@ models:
       - name: campaign_name
         description: The name of the campaign in Snapchat.
       - name: currency
-        description: The current used by the account in Snapchat.
+        description: The currency used by the account in Snapchat.
       - name: spend
         description: The spend on the campaign in the given day.
       - name: impressions
@@ -159,17 +159,17 @@ models:
       - name: ad_squad_name
         description: The name of the ad squad in Snapchat.
       - name: currency
-        description: The current used by the account in Snapchat.
+        description: The currency used by the account in Snapchat.
       - name: spend
-        description: The spend on the ad in the given day.
+        description: The spend on the ad squad in the given day.
       - name: impressions
-        description: The number of impressions the ad had on the given day.
+        description: The number of impressions the ad squad had on the given day.
       - name: swipes
-        description: The number of swipes the ad had on the given day.
+        description: The number of swipes the ad squad had on the given day.
       - name: conversion_purchases
-        description: The total number of purchases for an ad on the given day.
+        description: The total number of purchases for an ad squad on the given day.
       - name: conversion_purchases_value
-        description: The total value of purchases for an ad on the given day.
+        description: The total value of purchases for an ad squad on the given day.
       - name: total_conversions
         description: The total conversions being brought in the conversion fields you select in your `snapchat_ads__conversion_fields`.
 
@@ -213,7 +213,7 @@ models:
       - name: campaign_name
         description: The name of the campaign in Snapchat.
       - name: currency
-        description: The current used by the account in Snapchat.
+        description: The currency used by the account in Snapchat.
       - name: base_url
         description: The base URL of the ad, extracted from the web_view_url.
         tests:

@@ -20,5 +20,7 @@ public_models: [
   "snapchat_ads__url_report",
   "snapchat_ads__account_report",
   "snapchat_ads__ad_squad_report",
-  "snapchat_ads__campaign_report"
+  "snapchat_ads__campaign_report",
+  "snapchat_ads__campaign_country_report",
+  "snapchat_ads__campaign_region_report"
 ]
