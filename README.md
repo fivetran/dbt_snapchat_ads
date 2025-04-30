@@ -1,4 +1,5 @@
-<p align="center">
+# Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_snapchat_ads/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -10,7 +11,6 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
 ## What does this dbt package do?
 - Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/snapchat-ads) in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/snapchat-ads#schemainformation) and builds off the output of our [Snapchat Ads source package](https://github.com/fivetran/dbt_snapchat_ads_source).
 - Generates a comprehensive data dictionary of your source and modeled Snapchat Ads data through the [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/).
@@ -27,10 +27,12 @@ The following table provides a detailed list of all tables materialized within t
 | [snapchat_ads__campaign_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_report)    | Each record represents the daily ad performance of each campaign.                                                      |
 | [snapchat_ads__ad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_report)          | Each record represents the daily ad performance of each ad.                                                            |
 | [snapchat_ads__url_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__url_report)         | Each record represents the daily ad performance of each ad url.                                                           |
-| [snapchat_ads__ad_squad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report)    | Each record represents the daily ad performance of each ad squad.
+| [snapchat_ads__ad_squad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report)    | Each record represents the daily ad performance of each ad squad. |
+| [snapchat_ads__campaign_country_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_country_report)    | Each record represents the daily ad performance of each campaign per country.                                                      |
+| [snapchat_ads__campaign_region_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_region_report)    | Each record represents the daily ad performance of each campaign per region.                                                      |
 
 ### Materialized Models
-Each Quickstart transformation job run materializes 23 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
+Each Quickstart transformation job run materializes 29 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
 <!--section-end-->
 
 ## How do I use the dbt package?
@@ -55,7 +57,7 @@ If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_repor
 ```yml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=0.8.0", "<0.9.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.9.0", "<0.10.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 Do NOT include the `snapchat_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
@@ -73,6 +75,15 @@ vars:
 
 ### (Optional) Step 4: Additional configurations
 <details open><summary>Expand/Collapse details</summary>
+
+#### Enabling models that are disabled by default
+For certain models, we have disabled them by default because of a smaller percentages of accounts syncing the underlying tables. To enable them, add the following configuration to your root `dbt_project.yml` file:
+
+```yml
+vars:
+    snapchat_ads__using_campaign_country_report: true # Enables the snapchat_ads__campaign_country_report model. False by default. Requires the campaign_geo_country_daily_report source table.
+    snapchat_ads__using_campaign_region_report: true # Enables the snapchat_ads__campaign_region_report. False by default. Requires the campaign_geo_region_daily_report source table.
+```
 
 #### Union multiple connections
 If you have multiple snapchat_ads connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `snapchat_ads_union_schemas` OR `snapchat_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
@@ -104,6 +115,10 @@ vars:
     snapchat_ads__campaign_hourly_report_passthrough_metrics:
       - name: "unique_string_field"
         alias: "field_id"
+    snapchat_ads__campaign_daily_country_report_passthrough_metrics: # sources from the campaign_geo_country_daily_report table. Persists through to snapchat_ads__campaign_country_report.
+      - name: "new_measure_country_report"
+    snapchat_ads__campaign_daily_region_report_passthrough_metrics: # sources from the campaign_geo_region_daily_report table. Persists through to snapchat_ads__campaign_region_report.
+      - name: "new_measure_region_report"
 ```
 
 >**Note**: Make sure to exercise due diligence when adding metrics to these models. The metrics added by default (swipes, impressions, spend, and conversions) have been vetted by the Fivetran team, maintaining this package for accuracy. There are metrics included within the source reports, such as metric averages, which may be inaccurately represented at the grain for reports created in this package. You must ensure that whichever metrics you pass through are appropriate to aggregate at the respective reporting levels in this package.
@@ -134,7 +149,7 @@ vars:
 ```
     
 #### Change the build schema
-By default, this package builds the Snapchat Ads staging models (9 views, 9 tables) within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models (5 tables) within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
+By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 models:
@@ -157,11 +172,11 @@ Fivetran offers the ability for you to orchestrate your dbt project through [Fiv
 ## Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. These dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
 > IMPORTANT: If you have any of these dependent packages in your own `packages.yml` file, we highly recommend that you remove them from your root `packages.yml` to avoid package version conflicts.
-    
+
 ```yml
 packages:
     - package: fivetran/snapchat_ads_source
-      version: [">=0.7.0", "<0.8.0"]
+      version: [">=0.8.0", "<0.9.0"]
 
     - package: fivetran/fivetran_utils
       version: [">=0.4.0", "<0.5.0"]

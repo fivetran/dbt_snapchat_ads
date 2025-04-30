@@ -9,10 +9,18 @@ destination_configurations:
       - macro_namespace: dbt_utils
         search_order: [ 'spark_utils', 'dbt_utils' ]
 
+table_variables:
+  snapchat_ads__using_campaign_country_report:
+    - campaign_geo_country_daily_report
+  snapchat_ads__using_campaign_region_report:  
+    - campaign_geo_region_daily_report
+
 public_models: [
   "snapchat_ads__ad_report",
   "snapchat_ads__url_report",
   "snapchat_ads__account_report",
   "snapchat_ads__ad_squad_report",
-  "snapchat_ads__campaign_report"
+  "snapchat_ads__campaign_report",
+  "snapchat_ads__campaign_country_report",
+  "snapchat_ads__campaign_region_report"
 ]

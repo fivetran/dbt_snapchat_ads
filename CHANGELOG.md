@@ -1,3 +1,36 @@
+# dbt_snapchat_ads v0.9.0
+[PR #34](https://github.com/fivetran/dbt_snapchat_ads/pull/34) introduces the following updates:
+
+## Schema Updates
+
+**7 total changes • 0 breaking changes**
+| **Data Model** | **Change type** | **Old name** | **New name** | **Notes** |
+| ---------------- | --------------- | ------------ | ------------ | --------- |
+| [snapchat_ads__campaign_country_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_country_report) | New Transforms Model |   |   |  Each record represents the daily performance of a Snapchat campaign per country.  |
+| [snapchat_ads__campaign_region_report]((https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_region_report)) | New Transforms Model |   |   |  Each record represents the daily performance of a Snapchat campaign per region.  |
+| [stg_snapchat_ads__campaign_geo_country_daily_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads_source.stg_snapchat_ads__campaign_geo_country_daily_report) | New Staging Model |   |   |  Uses `campaign_geo_country_daily_report` source table  |
+| [stg_snapchat_ads__campaign_geo_region_daily_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads_source.stg_snapchat_ads__campaign_geo_region_daily_report) | New Staging Model |   |   |  Uses `campaign_geo_region_daily_report` source table  |
+| [stg_snapchat_ads__campaign_geo_country_daily_report_tmp](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads_source.stg_snapchat_ads__campaign_geo_country_daily_report_tmp) | New Temp Model |   |   |  Uses `campaign_geo_country_daily_report` source table  |
+| [stg_snapchat_ads__campaign_geo_region_daily_report_tmp](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads_source.stg_snapchat_ads__campaign_geo_region_daily_report_tmp) | New Temp Model |   |   |  Uses `campaign_geo_region_daily_report` source table  |
+| [stg_snapchat_ads__campaign_history](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads_source.stg_snapchat_ads__campaign_history) | New Columns | | `daily_budget_micro`, `start_time`, `end_time`, `lifetime_spend_cap_micro`, `status`, `objective` |  |
+
+Please note that these are disabled by default for dbt Core users. To enable them, add the following configuration to your root `dbt_project.yml` file. For more information on how to configure this, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads/tree/main?tab=readme-ov-file#enabling-models-that-are-disabled-by-default).
+
+```yml
+vars:
+    snapchat_ads__using_campaign_country_report: true # Necessary for the snapchat_ads__campaign_country_report model. False by default. Requires the campaign_geo_country_daily_report source table
+    snapchat_ads__using_campaign_region_report: true # Necessary for the snapchat_ads__campaign_region_report model. False by default. Requires the campaign_geo_region_daily_report source table
+```
+
+## Feature Updates
+- Introduced the following variables for each respective new transformation model in order to pass through additional metrics from their corresponding source tables:
+  - `snapchat_ads__campaign_daily_country_report_passthrough_metrics`
+  - `snapchat_ads__campaign_daily_region_report_passthrough_metrics`
+For more information on how to configure this, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads/tree/main?tab=readme-ov-file#passing-through-additional-metrics).
+
+## Documentation Updates
+- Updated field descriptions to make more accurate.
+
 # dbt_snapchat_ads v0.8.0
 This release introduces the following updates:
 
