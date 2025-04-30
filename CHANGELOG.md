@@ -23,7 +23,7 @@ vars:
 ```
 
 ## Feature Updates
-- Introduced the following variables for each respective new staging model in order to pass through additional metrics from their corresponding source tables:
+- Introduced the following variables for each respective new transformation model in order to pass through additional metrics from their corresponding source tables:
   - `snapchat_ads__campaign_daily_country_report_passthrough_metrics`
   - `snapchat_ads__campaign_daily_region_report_passthrough_metrics`
 For more information on how to configure this, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads/tree/main?tab=readme-ov-file#passing-through-additional-metrics).
