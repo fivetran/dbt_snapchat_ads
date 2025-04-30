@@ -1,7 +1,7 @@
 {{ config(
         tags="fivetran_validations",
         enabled=var('fivetran_validation_tests_enabled', false) and
-        var('snapchat_ads__using_campaign_country_report', false)
+        var('snapchat_ads__using_campaign_region_report', false)
 ) }}
 
 with source as (
