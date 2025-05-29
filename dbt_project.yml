@@ -27,4 +27,4 @@ models:
     +schema: snapchat_ads
     +materialized: table
     intermediate:
-      materialized: ephemeral
+      +materialized: ephemeral
