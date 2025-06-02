@@ -1,3 +1,13 @@
+# dbt_snapchat_ads v0.9.1
+This release introduces the following updates:
+
+## Under the Hood
+- Prepends `materialized` configs in the package's `dbt_project.yml` file with `+` to improve compatibility with the newer versions of dbt-core starting with v1.10.0. ([PR #35](https://github.com/fivetran/dbt_snapchat_ads/pull/35))
+- Updates the package maintainer pull request template. ([PR #36](https://github.com/fivetran/dbt_snapchat_ads/pull/36))
+
+## Contributors
+- [@b-per](https://github.com/b-per) ([PR #35](https://github.com/fivetran/dbt_snapchat_ads/pull/35))
+
 # dbt_snapchat_ads v0.9.0
 [PR #34](https://github.com/fivetran/dbt_snapchat_ads/pull/34) introduces the following updates:
 
