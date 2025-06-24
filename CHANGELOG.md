@@ -1,3 +1,26 @@
+# dbt_snapchat_ads v0.10.0
+
+[PR #37](https://github.com/fivetran/dbt_snapchat_ads/pull/37) includes the following updates:
+
+## Breaking Change for dbt Core < 1.9.6
+> *Note: This is not relevant to Fivetran Quickstart users.*
+
+Migrated `freshness` from a top-level source property to a source `config` in alignment with [recent updates](https://github.com/dbt-labs/dbt-core/issues/11506) from dbt Core ([Source PR #28](https://github.com/fivetran/dbt_snapchat_ads_source/pull/28)). This will resolve the following deprecation warning that users running dbt >= 1.9.6 may have received:
+
+```
+[WARNING]: Deprecated functionality
+Found `freshness` as a top-level property of `snapchat_ads` in file
+`models/src_snapchat_ads.yml`. The `freshness` top-level property should be moved
+into the `config` of `snapchat_ads`.
+```
+
+**IMPORTANT:** Users running dbt Core < 1.9.6 will not be able to utilize freshness tests in this release or any subsequent releases, as older versions of dbt will not recognize freshness as a source `config` and therefore not run the tests.
+
+If you are using dbt Core < 1.9.6 and want to continue running Snapchat Ads freshness tests, please elect **one** of the following options:
+  1. (Recommended) Upgrade to dbt Core >= 1.9.6
+  2. Do not upgrade your installed version of the `snapchat_ads` package. Pin your dependency on v0.9.1 in your `packages.yml` file.
+  3. Utilize a dbt [override](https://docs.getdbt.com/reference/resource-properties/overrides) to overwrite the package's `snapchat_ads` source and apply freshness via the [old](https://github.com/fivetran/dbt_snapchat_ads_source/blob/v0.8.0/models/src_snapchat.yml#L10-L12) top-level property route. This will require you to copy and paste the entirety of the `src_snapchat_ads.yml` [file](https://github.com/fivetran/dbt_snapchat_ads_source/blob/v0.8.0/models/src_snapchat.yml#L4-L479) and add an `overrides: snapchat_ads_source` property.
+
 # dbt_snapchat_ads v0.9.1
 This release introduces the following updates:
 
