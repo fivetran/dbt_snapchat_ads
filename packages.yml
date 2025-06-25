@@ -1,5 +1,3 @@
 packages:
-# - package: fivetran/snapchat_ads_source
-#   version: [">=0.9.0", "<0.10.0"]
-- git: https://github.com/fivetran/dbt_snapchat_ads_source.git
-  revision: feature/update-freshness-config
+- package: fivetran/snapchat_ads_source
+  version: [">=0.9.0", "<0.10.0"]
