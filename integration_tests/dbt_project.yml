@@ -28,6 +28,8 @@ models:
   +schema: "snapchat_ads_{{ var('directed_schema','dev') }}"
 
 seeds:
+  +docs:
+    show: False
   snapchat_ads_integration_tests:
     +quote_columns: "{{ true if target.type in ('redshift', 'postgres') else false }}"
     snapchat_ad_hourly_report_data:
@@ -36,3 +38,6 @@ seeds:
     snapchat_creative_url_tag_history_data:
       +column_types:
         updated_at: timestamp
+flags:
+  send_anonymous_usage_stats: False
+  use_colors: True
