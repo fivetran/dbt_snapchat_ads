@@ -1,5 +1,5 @@
 {{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true),
- unique_key = ['source_relation','ad_account_id','ad_squad_id','campaign_id',date_day'],
+ unique_key = ['source_relation','ad_account_id','ad_squad_id','campaign_id','date_day'],
     partition_by={
       "field": "date_day", 
       "data_type": "date",
