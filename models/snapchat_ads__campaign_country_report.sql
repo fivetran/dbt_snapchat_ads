@@ -1,4 +1,13 @@
-{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true) and var('snapchat_ads__using_campaign_country_report', false)) }}
+{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true) and var('snapchat_ads__using_campaign_country_report', false),
+ unique_key = ['source_relation','ad_account_id','country','campaign_id',date_day'],
+    partition_by={
+      "field": "date_day", 
+      "data_type": "date",
+      "granularity": "day"
+    }
+
+
+) }}
 
 with campaign_daily as (
 

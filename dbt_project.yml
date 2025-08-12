@@ -24,7 +24,7 @@ vars:
   snapchat_ads__conversion_fields: ['conversion_purchases']
 models:
   snapchat_ads:
-    +schema: snapchat_ads
+    +schema: snapchat_ads_summary_prod
     +materialized: table
     intermediate:
       +materialized: ephemeral

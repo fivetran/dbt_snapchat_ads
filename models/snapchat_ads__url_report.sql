@@ -1,4 +1,11 @@
-{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true)) }}
+{{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true),
+    partition_by={
+      "field": "date_day", 
+      "data_type": "date",
+      "granularity": "day"
+    }
+
+) }}
 
 with ad_hourly as (
 
