@@ -2,13 +2,13 @@
 with base as (
 
     select *
-    from {{ var('creative_history') }}
+    from {{ ref('stg_snapchat_ads__creative_history') }}
     where is_most_recent_record = true
 
 ), url_tags as (
 
     select *
-    from {{ var('creative_url_tag_history') }}
+    from {{ ref('stg_snapchat_ads__creative_url_tag_history') }}
     where is_most_recent_record = true
 
 ), url_tags_pivoted as (

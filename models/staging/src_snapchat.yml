@@ -1,0 +1,478 @@
+version: 2
+
+sources:
+  - name: snapchat_ads  # This source will only be used if you are using a single tiktok_ads source connector. If multiple sources are being unioned, their tables will be directly referenced via adapter.get_relation.
+    schema: "{{ var('snapchat_ads_schema', 'snapchat_ads') }}"
+    database: "{% if target.type != 'spark'%}{{ var('snapchat_ads_database', target.database) }}{% endif %}"
+    loader: Fivetran
+
+    config:
+      loaded_at_field: _fivetran_synced
+      enabled: "{{ var('ad_reporting__snapchat_ads_enabled', true) }}"
+      freshness: 
+        warn_after: {count: 48, period: hour}
+        error_after: {count: 168, period: hour}
+
+    tables:
+      - name: ad_account_history
+        identifier: "{{ var('snapchat_ads_ad_account_history_identifier', 'ad_account_history') }}"
+        description: Each record in this table represents a historic version of an ad account in Snapchat.
+        columns:
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+          - name: id
+            description: The ID of the account in Snapchat.
+          - name: name
+            description: The name of the account in Snapchat.
+          - name: advertiser
+            description: Name of advertiser
+          - name: currency
+            description: Currency used by account
+          - name: created_at
+            description: Created at timestamp
+          - name: timezone
+            description: Account timezone
+
+      - name: ad_history
+        identifier: "{{ var('snapchat_ads_ad_history_identifier', 'ad_history') }}"
+        description: Each record in this table represents a historic version of an ad in Snapchat.
+        columns:
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+          - name: id
+            description: The ID of the ad in Snapchat.
+          - name: ad_squad_id
+            description: The ID of the related ad squad in Snapchat.
+          - name: creative_id
+            description: The ID of the related creative in Snapchat.
+          - name: name
+            description: The name of the ad in Snapchat.
+          - name: created_at
+            description: Created at timestamp
+
+      - name: ad_hourly_report
+        identifier: "{{ var('snapchat_ads_ad_hourly_report_identifier', 'ad_hourly_report') }}"
+        description: Each record represents an hourly performance summary for an ad in Snapchat.
+        columns:
+          - name: ad_id
+            description: The ID of the ad that the report relates to in Snapchat.
+          - name: date
+            description: The hour that the report relates to.
+          - name: attachment_quartile_1
+            description: Number of times your Long Form Video was viewed to 25%
+          - name: attachment_quartile_2
+            description: Number of times your Long Form Video was viewed to 50%
+          - name: attachment_quartile_3
+            description: Number of times your Long Form Video was viewed to 75%
+          - name: attachment_total_view_time_millis
+            description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+          - name: attachment_view_completion
+            description: The number of times your Long Form Video was viewed to completion (97% )
+          - name: quartile_1
+            description: The number of times your video ad was viewed to 25%
+          - name: quartile_2
+            description: The number of times your video ad was viewed to 50%
+          - name: quartile_3
+            description: The number of times your video ad was viewed to 75%
+          - name: saves
+            description: Number of times an ad was saved to Memories
+          - name: shares
+            description: Number of times an ad was shared in a Chat or Story
+          - name: screen_time_millis
+            description: The number of milli seconds spent watching your ad across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+          - name: video_views
+            description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+          - name: view_completion
+            description: The number of times your video ad was viewed to completion (97% )
+          - name: view_time_millis
+            description: The number of milli seconds spent watching your ad across all users reached.
+          - name: impressions
+            description: The number of impressions for an ad in the hour of the record.
+          - name: spend
+            description: The amount of spend in microdollars for an ad in the hour of the record.
+          - name: swipes
+            description: The number of swipes for an ad in the hour of the record. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+          - name: conversion_purchases_value
+            description: The total value of purchases attributed to an ad in the hour of the record (microcurrency in Ad Account's currency).
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+          - name: conversion_purchases
+            description: The total number of purchases attributed to an ad in the hour of the record.
+          - name: conversion_add_billing
+            description: Total number of attributed "ADD_BILLING" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_save
+            description: Total number of attributed "SAVE" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_add_cart
+            description: Total number of attributed "ADD_CART" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_sign_ups
+            description: Total number of attributed "SIGN_UP" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_start_checkout
+            description: Total number of attributed "START_CHECKOUT" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_searches
+            description: Total number of attributed "SEARCH" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_view_content
+            description: Total number of attributed "VIEW_CONTENT" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_app_opens
+            description: Total number of attributed "APP_OPEN" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_level_completes
+            description: Total number of attributed "LEVEL_COMPLETE" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_page_views
+            description: Total number of attributed "PAGE_VIEW" conversion events for an ad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+
+      - name: ad_squad_history
+        identifier: "{{ var('snapchat_ads_ad_squad_history_identifier', 'ad_squad_history') }}"
+        description: Each record in this table represents a historic version of an ad squad in Snapchat.
+        columns:
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+          - name: id
+            description: The ID of the ad squad in Snapchat.
+          - name: created_at
+            description: Created at timestamp.
+          - name: campaign_id
+            description: The ID of the related campaign in Snapchat.
+          - name: name
+            description: The name of the ad squad in Snapchat.
+
+      - name: ad_squad_hourly_report
+        identifier: "{{ var('snapchat_ads_ad_squad_hourly_report_identifier', 'ad_squad_hourly_report') }}"
+        description: Each record represents an hourly performance summary for each ad squad.
+        columns:
+          - name: ad_squad_id
+            description: ID of the ad squad.
+          - name: date
+            description: The hour that the report relates to.
+          - name: attachment_quartile_1
+            description: Number of times your Long Form Video was viewed to 25%
+          - name: attachment_quartile_2
+            description: Number of times your Long Form Video was viewed to 50%
+          - name: attachment_quartile_3
+            description: Number of times your Long Form Video was viewed to 75%
+          - name: attachment_total_view_time_millis
+            description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+          - name: attachment_view_completion
+            description: The number of times your Long Form Video was viewed to completion (97% )
+          - name: quartile_1
+            description: The number of times your video was viewed to 25%
+          - name: quartile_2
+            description: The number of times your video was viewed to 50%
+          - name: quartile_3
+            description: The number of times your video was viewed to 75%
+          - name: saves
+            description: Number of times components of the ad squad were saved to Memories
+          - name: shares
+            description: Number of times components of the ad squad were shared in a Chat or Story
+          - name: screen_time_millis
+            description: The number of milli seconds spent watching your ad squad across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+          - name: video_views
+            description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+          - name: view_completion
+            description: The number of times your video was viewed to completion (97% )
+          - name: view_time_millis
+            description: The number of milli seconds spent watching your ad squad across all users reached.
+          - name: impressions
+            description: The number of impressions for an ad squad in the hour of the record.
+          - name: spend
+            description: The amount of spend in microdollars for an ad squad in the hour of the record.
+          - name: swipes
+            description: The number of swipes for an ad squad in the hour of the record. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+          - name: conversion_purchases_value
+            description: The total value of purchases attributed to an ad squad in the hour of the record (microcurrency in Ad Account's currency).
+          - name: conversion_purchases
+            description: The total number of purchases attributed to an ad squad in the hour of the record.
+          - name: conversion_add_billing
+            description: Total number of attributed "ADD_BILLING" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_save
+            description: Total number of attributed "SAVE" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_add_cart
+            description: Total number of attributed "ADD_CART" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_sign_ups
+            description: Total number of attributed "SIGN_UP" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_start_checkout
+            description: Total number of attributed "START_CHECKOUT" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_searches
+            description: Total number of attributed "SEARCH" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_view_content
+            description: Total number of attributed "VIEW_CONTENT" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_app_opens
+            description: Total number of attributed "APP_OPEN" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_level_completes
+            description: Total number of attributed "LEVEL_COMPLETE" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_page_views
+            description: Total number of attributed "PAGE_VIEW" conversion events for an ad squad in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+
+      - name: campaign_history
+        identifier: "{{ var('snapchat_ads_campaign_history_identifier', 'campaign_history') }}"
+        description: Each record in this table represents a historic version of a campaign in Snapchat.
+        columns:
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+          - name: id
+            description: The name of the campaign in Snapchat.
+          - name: created_at
+            description: Created at timestamp.
+          - name: ad_account_id
+            description: The ID of the related ad account in Snapchat.
+          - name: name
+            description: The name of the campaign in Snapchat.
+          - name: daily_budget_micro
+            description: Daily Spend Cap (micro-currency)
+          - name: start_time
+            description: Start time
+          - name: end_time
+            description: End time
+          - name: lifetime_spend_cap_micro
+            description: Lifetime spend cap for the campaign (microcurrency)
+          - name: status
+            description: Campaign status (ACTIVE, PAUSED)
+          - name: objective
+            description: Objective of the Campaign (BRAND_AWARENESS (default), APP_CONVERSION, APP_INSTALL, etc)
+
+      - name: campaign_hourly_report
+        identifier: "{{ var('snapchat_ads_campaign_hourly_report_identifier', 'campaign_hourly_report') }}"
+        description: Each record represents an hourly performance summary for each campaign.
+        columns:
+          - name: campaign_id
+            description: ID of campaign
+          - name: date
+            description: The hour that the report relates to.
+          - name: attachment_quartile_1
+            description: Number of times your Long Form Video was viewed to 25%
+          - name: attachment_quartile_2
+            description: Number of times your Long Form Video was viewed to 50%
+          - name: attachment_quartile_3
+            description: Number of times your Long Form Video was viewed to 75%
+          - name: attachment_total_view_time_millis
+            description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+          - name: attachment_view_completion
+            description: The number of times your Long Form Video was viewed to completion (97% )
+          - name: quartile_1
+            description: The number of times your video was viewed to 25%
+          - name: quartile_2
+            description: The number of times your video was viewed to 50%
+          - name: quartile_3
+            description: The number of times your video was viewed to 75%
+          - name: saves
+            description: Number of times components of the campaign were saved to Memories
+          - name: shares
+            description: Number of times components of the campaign were shared in a Chat or Story
+          - name: screen_time_millis
+            description: The number of milli seconds spent watching your campaign across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+          - name: video_views
+            description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+          - name: view_completion
+            description: The number of times your video was viewed to completion (97% )
+          - name: view_time_millis
+            description: The number of milli seconds spent watching your campaign across all users reached.
+          - name: impressions
+            description: The number of impressions for a campaign in the hour of the record.
+          - name: spend
+            description: The amount of spend in microdollars for a campaign in the hour of the record.
+          - name: swipes
+            description: The number of swipes for a campaign in the hour of the record. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+          - name: conversion_purchases_value
+            description: The total value of purchases attributed to a campaign in the hour of the record (microcurrency in Ad Account's currency).
+          - name: conversion_purchases
+            description: The total number of purchases attributed to a campaign in the hour of the record.
+          - name: conversion_add_billing
+            description: Total number of attributed "ADD_BILLING" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_save
+            description: Total number of attributed "SAVE" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_add_cart
+            description: Total number of attributed "ADD_CART" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_sign_ups
+            description: Total number of attributed "SIGN_UP" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_start_checkout
+            description: Total number of attributed "START_CHECKOUT" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_searches
+            description: Total number of attributed "SEARCH" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_view_content
+            description: Total number of attributed "VIEW_CONTENT" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_app_opens
+            description: Total number of attributed "APP_OPEN" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_level_completes
+            description: Total number of attributed "LEVEL_COMPLETE" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_page_views
+            description: Total number of attributed "PAGE_VIEW" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+
+      - name: creative_history
+        identifier: "{{ var('snapchat_ads_creative_history_identifier', 'creative_history') }}"
+        description: Each record in this table represents a historic version of a creative in Snapchat.
+        columns:
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+          - name: id
+            description: The ID of the creative in Snapchat.
+          - name: created_at
+            description: Created at timestamp.
+          - name: ad_account_id
+            description: The ID of the related ad account in Snapchat.
+          - name: name
+            description: The name of the creative in Snapchat.
+          - name: web_view_url
+            description: The URL of the creative if the creative is of type 'web view'.
+
+      - name: creative_url_tag_history
+        identifier: "{{ var('snapchat_ads_creative_url_tag_history_identifier', 'creative_url_tag_history') }}"
+        description: Each record in this table represents a URL parameter key-value pair for a creative in Snapchat.
+        columns:
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+          - name: creative_id
+            description: The ID of the related creative in Snapchat.
+          - name: created_at
+            description: Created at timestamp.
+          - name: key
+            description: The URL parameter key, i.e. UTM_SOURCE.
+          - name: value
+            description: The URL parameter value, i.e. Snapchat.
+
+      - name: campaign_geo_country_daily_report
+        identifier: "{{ var('snapchat_ads_campaign_geo_country_daily_report_identifier', 'campaign_geo_country_daily_report') }}"
+        description: Each record represents a daily performance summary per country for each campaign.
+        config:
+          enabled: "{{ var('ad_reporting__snapchat_ads_enabled', True) and var('snapchat_ads__using_campaign_country_report', False) }}"
+        columns:
+          - name: campaign_id
+            description: ID of campaign
+          - name: date
+            description: The day that the report relates to.
+          - name: country
+            description: The country that the report relates to.
+          - name: attachment_quartile_1
+            description: Number of times your Long Form Video was viewed to 25%
+          - name: attachment_quartile_2
+            description: Number of times your Long Form Video was viewed to 50%
+          - name: attachment_quartile_3
+            description: Number of times your Long Form Video was viewed to 75%
+          - name: attachment_total_view_time_millis
+            description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+          - name: attachment_view_completion
+            description: The number of times your Long Form Video was viewed to completion (97%)
+          - name: quartile_1
+            description: The number of times your video was viewed to 25%
+          - name: quartile_2
+            description: The number of times your video was viewed to 50%
+          - name: quartile_3
+            description: The number of times your video was viewed to 75%
+          - name: saves
+            description: Number of times components of the campaign were saved to Memories
+          - name: shares
+            description: Number of times components of the campaign were shared in a Chat or Story
+          - name: screen_time_millis
+            description: The number of milli seconds spent watching your campaign across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+          - name: video_views
+            description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+          - name: view_completion
+            description: The number of times your video campaign was viewed to completion (97% )
+          - name: view_time_millis
+            description: The number of milli seconds spent watching your campaign across all users reached.
+          - name: impressions
+            description: The number of impressions for a campaign.
+          - name: spend
+            description: The amount of spend in microdollars for a campaign.
+          - name: swipes
+            description: The number of swipes for a campaign. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+          - name: conversion_purchases_value
+            description: The total value of purchases attributed to a campaign (microcurrency in Ad Account's currency).
+          - name: conversion_purchases
+            description: The total number of purchases attributed to a campaign.
+          - name: conversion_add_billing
+            description: Total number of attributed "ADD_BILLING" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_save
+            description: Total number of attributed "SAVE" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_add_cart
+            description: Total number of attributed "ADD_CART" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_sign_ups
+            description: Total number of attributed "SIGN_UP" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_start_checkout
+            description: Total number of attributed "START_CHECKOUT" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_searches
+            description: Total number of attributed "SEARCH" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_view_content
+            description: Total number of attributed "VIEW_CONTENT" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_app_opens
+            description: Total number of attributed "APP_OPEN" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_level_completes
+            description: Total number of attributed "LEVEL_COMPLETE" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_page_views
+            description: Total number of attributed "PAGE_VIEW" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
+
+      - name: campaign_geo_region_daily_report
+        identifier: "{{ var('snapchat_ads_campaign_geo_region_daily_report_identifier', 'campaign_geo_region_daily_report') }}"
+        description: Each record represents a daily performance summary per each region for each campaign.
+        config:
+          enabled: "{{ var('ad_reporting__snapchat_ads_enabled', True) and var('snapchat_ads__using_campaign_region_report', False) }}"
+        columns:
+          - name: campaign_id
+            description: ID of campaign
+          - name: date
+            description: The day that the report relates to.
+          - name: region
+            description: The region that the report relates to.
+          - name: attachment_quartile_1
+            description: Number of times your Long Form Video was viewed to 25%
+          - name: attachment_quartile_2
+            description: Number of times your Long Form Video was viewed to 50%
+          - name: attachment_quartile_3
+            description: Number of times your Long Form Video was viewed to 75%
+          - name: attachment_total_view_time_millis
+            description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+          - name: attachment_view_completion
+            description: The number of times your Long Form Video was viewed to completion (97%)
+          - name: quartile_1
+            description: The number of times your video was viewed to 25%
+          - name: quartile_2
+            description: The number of times your video was viewed to 50%
+          - name: quartile_3
+            description: The number of times your video was viewed to 75%
+          - name: saves
+            description: Number of times components of the campaign were saved to Memories
+          - name: shares
+            description: Number of times components of the campaign were shared in a Chat or Story
+          - name: screen_time_millis
+            description: The number of milli seconds spent watching your campaign across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+          - name: video_views
+            description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+          - name: view_completion
+            description: The number of times your video was viewed to completion (97% )
+          - name: view_time_millis
+            description: The number of milli seconds spent watching your campaign across all users reached.
+          - name: impressions
+            description: The number of impressions for a campaign.
+          - name: spend
+            description: The amount of spend in microdollars for a campaign.
+          - name: swipes
+            description: The number of swipes for a campaign. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+          - name: conversion_purchases_value
+            description: The total value of purchases attributed to a campaign (microcurrency in Ad Account's currency).
+          - name: conversion_purchases
+            description: The total number of purchases attributed to a campaign.
+          - name: conversion_add_billing
+            description: Total number of attributed "ADD_BILLING" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_save
+            description: Total number of attributed "SAVE" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_add_cart
+            description: Total number of attributed "ADD_CART" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_sign_ups
+            description: Total number of attributed "SIGN_UP" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_start_checkout
+            description: Total number of attributed "START_CHECKOUT" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_searches
+            description: Total number of attributed "SEARCH" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_view_content
+            description: Total number of attributed "VIEW_CONTENT" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_app_opens
+            description: Total number of attributed "APP_OPEN" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_level_completes
+            description: Total number of attributed "LEVEL_COMPLETE" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: conversion_page_views
+            description: Total number of attributed "PAGE_VIEW" conversion events for a campaign in the hour of the record. This is brought in via the snapchat_ads__conversion_fields variable. For more information, refer to the [README](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/README.md#configuring-conversion-fields).
+          - name: _fivetran_synced
+            description: "{{ doc('_fivetran_synced') }}"
