@@ -19,6 +19,10 @@
   - Removed all `accepted_values` tests.
   - Moved `loaded_at_field: _fivetran_synced` under the `config:` block in `src_snapchat_ads.yml`.
 
+## Under the Hood
+- Updated conditions in `.github/workflows/auto-release.yml`.
+- Added `.github/workflows/generate-docs.yml`.
+
 # dbt_snapchat_ads v0.10.0
 
 [PR #37](https://github.com/fivetran/dbt_snapchat_ads/pull/37) includes the following updates:

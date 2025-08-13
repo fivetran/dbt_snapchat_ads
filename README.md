@@ -1,4 +1,5 @@
 # Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
+
 <p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_snapchat_ads/blob/main/LICENSE">
@@ -9,6 +10,9 @@
         <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
+    <a alt="Fivetran Quickstart Compatible"
+        href="https://fivetran.com/docs/transformations/dbt/quickstart">
+        <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
 ## What does this dbt package do?
@@ -142,12 +146,12 @@ vars:
 If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable. This is not available when running the package on multiple unioned connections.
 
 > IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/dbt_project.yml) variable declarations to see the expected names.
-    
+
 ```yml
 vars:
     snapchat_ads_<default_source_table_name>_identifier: your_table_name 
 ```
-    
+
 #### Change the build schema
 By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
 
@@ -164,7 +168,7 @@ models:
 ### (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>
 <br>
-    
+
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
 
 </details>
