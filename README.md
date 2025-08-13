@@ -1,4 +1,4 @@
-# Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
+# Snapchat Ads dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
 
 <p align="left">
     <a alt="License"
