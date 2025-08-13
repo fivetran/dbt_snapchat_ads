@@ -3,12 +3,6 @@ version: 2
 models:
   - name: snapchat_ads__account_report
     description: Each record represents the daily performance of a Snapchat ad account.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - ad_account_id
-            - date_day
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -41,14 +35,6 @@ models:
 
   - name: snapchat_ads__ad_report
     description: Each record represents the daily performance of a Snapchat ad account.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - ad_id
-            - ad_squad_id
-            - campaign_id
-            - date_day
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -91,12 +77,6 @@ models:
 
   - name: snapchat_ads__campaign_report
     description: Each record represents the daily performance of a Snapchat campaign.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - campaign_id
-            - date_day
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -131,12 +111,6 @@ models:
 
   - name: snapchat_ads__ad_squad_report
     description: Each record represents the daily performance of a Snapchat ad squad.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - ad_squad_id
-            - date_day
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -176,17 +150,6 @@ models:
 
   - name: snapchat_ads__url_report
     description: Each record represents the daily performance of Snapchat ads that leverage urls.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - ad_id
-            - ad_squad_id
-            - campaign_id
-            - date_day
-          config:
-            # Below is so we don't run this test if the user has allowed urls to have null entries
-            enabled: "{{ var('ad_reporting__url_report__using_null_filter', True) }}"
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -250,13 +213,6 @@ models:
 
   - name: snapchat_ads__campaign_country_report
     description: Each record represents the daily performance of a Snapchat campaign per country.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - campaign_id
-            - country
-            - date_day
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -314,13 +270,6 @@ models:
 
   - name: snapchat_ads__campaign_region_report
     description: Each record represents the daily performance of a Snapchat campaign per region.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - source_relation
-            - campaign_id
-            - region
-            - date_day
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"

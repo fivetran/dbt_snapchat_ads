@@ -1,0 +1,429 @@
+version: 2
+
+models:
+  - name: stg_snapchat_ads__ad_account_history
+    description: Each record in this table represents a historic version of an ad account in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: _fivetran_synced
+        description: "{{ doc('_fivetran_synced') }}"
+        tests:
+          - not_null
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+        tests:
+          - not_null
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: advertiser
+        description: Name of advertiser
+      - name: currency
+        description: Currency used by account
+      - name: created_at
+        description: Created at timestamp
+      - name: updated_at
+        description: Timestamp of when the record was updated.
+      - name: timezone
+        description: Account timezone
+      - name: is_most_recent_record
+        description: "{{ doc('is_most_recent_record') }}"
+
+  - name: stg_snapchat_ads__ad_history
+    description: Each record in this table represents a historic version of an ad in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: _fivetran_synced
+        description: "{{ doc('_fivetran_synced') }}"
+        tests:
+          - not_null
+      - name: ad_id
+        description: The ID of the ad in Snapchat.
+        tests:
+          - not_null
+      - name: ad_squad_id
+        description: The ID of the related ad squad in Snapchat.
+      - name: creative_id
+        description: The ID of the related creative in Snapchat.
+      - name: ad_name
+        description: The name of the ad in Snapchat.
+      - name: created_at
+        description: Created at timestamp
+      - name: updated_at
+        description: Timestamp of when the record was updated.
+      - name: is_most_recent_record
+        description: "{{ doc('is_most_recent_record') }}"
+
+  - name: stg_snapchat_ads__ad_hourly_report
+    description: Each record represents an hourly performance summary for an ad in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: ad_id
+        description: The ID of the ad that the report relates to in Snapchat.
+        tests:
+          - not_null
+      - name: date_hour
+        description: The hour that the report relates to.
+        tests:
+          - not_null
+      - name: attachment_quartile_1
+        description: Number of times your Long Form Video was viewed to 25% 
+      - name: attachment_quartile_2
+        description: Number of times your Long Form Video was viewed to 50% 
+      - name: attachment_quartile_3
+        description: Number of times your Long Form Video was viewed to 75% 
+      - name: attachment_total_view_time
+        description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+      - name: attachment_view_completion
+        description: The number of times your Long Form Video was viewed to completion (97% )
+      - name: quartile_1
+        description: The number of times your video ad was viewed to 25% 
+      - name: quartile_2
+        description: The number of times your video ad was viewed to 50% 
+      - name: quartile_3
+        description: The number of times your video ad was viewed to 75% 
+      - name: saves
+        description: Number of times an ad was saved to Memories
+      - name: shares
+        description: Number of times an ad was shared in a Chat or Story
+      - name: screen_time
+        description: The number of seconds spent watching your ad across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+      - name: video_views
+        description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+      - name: view_completion
+        description: The number of times your video ad was viewed to completion (97% )
+      - name: view_time
+        description: The number of seconds spent watching your ad across all users reached.
+      - name: impressions
+        description: The number of impressions for an ad in the hour of the record.
+      - name: spend
+        description: The amount of spend for an ad in the hour of the record converted from micros.
+      - name: swipes
+        description: The number of swipes for an ad in the hour of the record.
+      - name: conversion_purchases
+        description: The total number of purchases attributed to an ad for the day of the record.
+      - name: conversion_purchases_value
+        description: The total value of purchases attributed to an ad in the hour of the record (in Ad Account's currency, converted from microcurrency).
+
+  - name: stg_snapchat_ads__ad_squad_history
+    description: Each record in this table represents a historic version of an ad squad in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: _fivetran_synced
+        description: "{{ doc('_fivetran_synced') }}"
+        tests:
+          - not_null
+      - name: ad_squad_id
+        description: The ID of the ad squad in Snapchat.
+        tests:
+          - not_null
+      - name: ad_squad_name
+        description: The name of the ad squad in Snapchat.
+      - name: created_at
+        description: Created at timestamp.
+      - name: updated_at
+        description: Timestamp of when the record was updated.
+      - name: campaign_id
+        description: The ID of the related campaign in Snapchat.
+      - name: is_most_recent_record
+        description: "{{ doc('is_most_recent_record') }}"
+
+  - name: stg_snapchat_ads__ad_squad_hourly_report
+    description: Each record in this table represents a historic version of an ad in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: ad_squad_id
+        description: ID of the ad squad.
+        tests:
+          - not_null
+      - name: date_hour
+        description: The hour that the report relates to.
+        tests:
+          - not_null
+      - name: attachment_quartile_1
+        description: Number of times your Long Form Video was viewed to 25% 
+      - name: attachment_quartile_2
+        description: Number of times your Long Form Video was viewed to 50% 
+      - name: attachment_quartile_3
+        description: Number of times your Long Form Video was viewed to 75% 
+      - name: attachment_total_view_time
+        description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+      - name: attachment_view_completion
+        description: The number of times your Long Form Video was viewed to completion (97% )
+      - name: quartile_1
+        description: The number of times your video was viewed to 25% 
+      - name: quartile_2
+        description: The number of times your video was viewed to 50% 
+      - name: quartile_3
+        description: The number of times your video was viewed to 75% 
+      - name: saves
+        description: Number of times components of the ad squad were saved to Memories
+      - name: shares
+        description: Number of times components of the ad squad were shared in a Chat or Story
+      - name: screen_time
+        description: The number of seconds spent watching your ad squad across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+      - name: video_views
+        description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+      - name: view_completion
+        description: The number of times your video ad was viewed to completion (97% )
+      - name: view_time
+        description: The number of seconds spent watching your ad squad across all users reached.
+      - name: impressions
+        description: The number of impressions for an ad squad in the hour of the record.
+      - name: spend
+        description: The amount of spend for an ad squad in the hour of the record.
+      - name: swipes
+        description: The number of swipes for an ad squad in the hour of the record. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+      - name: conversion_purchases
+        description: The total number of purchases attributed to an ad squad for the day of the record.
+      - name: conversion_purchases_value
+        description: The total value of purchases attributed to an ad squad in the hour of the record (in Ad Account's currency, converted from microcurrency).
+
+  - name: stg_snapchat_ads__campaign_history
+    description: Each record in this table represents a historic version of a campaign in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: _fivetran_synced
+        description: "{{ doc('_fivetran_synced') }}"
+        tests:
+          - not_null
+      - name: campaign_id
+        description: The id of the campaign in Snapchat.
+        tests:
+          - not_null
+      - name: campaign_name
+        description: The name of the campaign in Snapchat.
+      - name: ad_account_id
+        description: The ID of the related ad account in Snapchat.
+      - name: created_at
+        description: Created at timestamp.
+      - name: updated_at
+        description: Timestamp of when the record was updated.
+      - name: is_most_recent_record
+        description: "{{ doc('is_most_recent_record') }}"
+      - name: daily_budget
+        description: Daily Spend Cap converted from microcurrency
+      - name: start_time
+        description: Start time
+      - name: end_time
+        description: End time
+      - name: lifetime_spend_cap
+        description: Lifetime spend cap for the campaign converted from microcurrency
+      - name: status
+        description: Campaign status (ACTIVE, PAUSED)
+      - name: objective
+        description: Objective of the Campaign (BRAND_AWARENESS (default), APP_CONVERSION, APP_INSTALL, etc)
+
+  - name: stg_snapchat_ads__campaign_hourly_report
+    description: Each record in this table represents a historic version of an ad in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: campaign_id
+        description: ID of campaign
+        tests:
+          - not_null
+      - name: date_hour
+        description: The hour that the report relates to.
+        tests:
+          - not_null
+      - name: attachment_quartile_1
+        description: Number of times your Long Form Video was viewed to 25% 
+      - name: attachment_quartile_2
+        description: Number of times your Long Form Video was viewed to 50% 
+      - name: attachment_quartile_3
+        description: Number of times your Long Form Video was viewed to 75% 
+      - name: attachment_total_view_time
+        description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+      - name: attachment_view_completion
+        description: The number of times your Long Form Video was viewed to completion (97% )
+      - name: quartile_1
+        description: The number of times your video was viewed to 25% 
+      - name: quartile_2
+        description: The number of times your video was viewed to 50% 
+      - name: quartile_3
+        description: The number of times your video was viewed to 75% 
+      - name: saves
+        description: Number of times components of the campaign were saved to Memories
+      - name: shares
+        description: Number of times components of the campaign were shared in a Chat or Story
+      - name: screen_time
+        description: The number of seconds spent watching your campaign across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+      - name: video_views
+        description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+      - name: view_completion
+        description: The number of times your video was viewed to completion (97% )
+      - name: view_time
+        description: The number of seconds spent watching your campaign across all users reached.
+      - name: impressions
+        description: The number of impressions for a campaign in the hour of the record.
+      - name: spend
+        description: The amount of spend for a campaign in the hour of the record.
+      - name: swipes
+        description: The number of swipes for a campaign in the hour of the record. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+      - name: conversion_purchases
+        description: The total number of purchases attributed to a campaign for the day of the record.
+      - name: conversion_purchases_value
+        description: The total value of purchases attributed to a campaign in the hour of the record (in Ad Account's currency, converted from microcurrency).
+
+  - name: stg_snapchat_ads__creative_history
+    description: Each record in this table represents a historic version of a creative in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: _fivetran_synced
+        description: "{{ doc('_fivetran_synced') }}"
+        tests:
+          - not_null
+      - name: creative_id
+        description: The ID of the creative in Snapchat.
+        tests:
+          - not_null
+      - name: creative_name
+        description: The name of the creative in Snapchat.
+      - name: ad_account_id
+        description: The ID of the related ad account in Snapchat.
+      - name: url
+        description: The URL of the creative if the creative is of type 'web view'.
+      - name: created_at
+        description: Created at timestamp.
+      - name: updated_at
+        description: Timestamp of when the record was updated.
+      - name: is_most_recent_record
+        description: "{{ doc('is_most_recent_record') }}"
+
+  - name: stg_snapchat_ads__creative_url_tag_history
+    description: Each record in this table represents a URL paramter key-value pair for a creative in Snapchat.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: creative_id
+        description: The ID of the related creative in Snapchat.
+        tests:
+          - not_null
+      - name: param_key
+        description: The URL parameter key, i.e. UTM_SOURCE.
+      - name: param_value
+        description: The URL parameter value, i.e. Snapchat.
+      - name: updated_at
+        description: Timestamp of when the record was updated.
+      - name: is_most_recent_record
+        description: "{{ doc('is_most_recent_record') }}"
+
+  - name: stg_snapchat_ads__campaign_geo_country_daily_report
+    description: Each record represents a daily performance summary per country for each campaign.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: campaign_id
+        description: ID of campaign
+        tests:
+          - not_null
+      - name: country
+        description: The country that the report relates to.
+        tests:
+          - not_null
+      - name: date_day
+        description: The day that the report relates to.
+        tests:
+          - not_null
+      - name: attachment_quartile_1
+        description: Number of times your Long Form Video was viewed to 25% 
+      - name: attachment_quartile_2
+        description: Number of times your Long Form Video was viewed to 50% 
+      - name: attachment_quartile_3
+        description: Number of times your Long Form Video was viewed to 75% 
+      - name: attachment_total_view_time
+        description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+      - name: attachment_view_completion
+        description: The number of times your Long Form Video was viewed to completion (97%)
+      - name: quartile_1
+        description: The number of times your video was viewed to 25% 
+      - name: quartile_2
+        description: The number of times your video was viewed to 50% 
+      - name: quartile_3
+        description: The number of times your video was viewed to 75% 
+      - name: saves
+        description: Number of times components of the campaign were saved to Memories
+      - name: shares
+        description: Number of times components of the campaign were shared in a Chat or Story
+      - name: screen_time
+        description: The number of seconds spent watching your campaign across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+      - name: video_views
+        description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+      - name: view_completion
+        description: The number of times your video was viewed to completion (97% )
+      - name: view_time
+        description: The number of seconds spent watching your campaign across all users reached.
+      - name: impressions
+        description: The number of impressions for a campaign.
+      - name: spend
+        description: The amount of spend for a campaign.
+      - name: swipes
+        description: The number of swipes for a campaign. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+      - name: conversion_purchases_value
+        description: The total value of purchases attributed to a campaign.
+      - name: conversion_purchases
+        description: The total number of purchases attributed to a campaign for the day of the record.
+
+
+  - name: stg_snapchat_ads__campaign_geo_region_daily_report
+    description: Each record represents a daily performance summary per region for each campaign.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: campaign_id
+        description: ID of campaign
+        tests:
+          - not_null
+      - name: region
+        description: The region that the report relates to.
+        tests:
+          - not_null
+      - name: date_day
+        description: The day that the report relates to.
+        tests:
+          - not_null
+      - name: attachment_quartile_1
+        description: Number of times your Long Form Video was viewed to 25% 
+      - name: attachment_quartile_2
+        description: Number of times your Long Form Video was viewed to 50% 
+      - name: attachment_quartile_3
+        description: Number of times your Long Form Video was viewed to 75% 
+      - name: attachment_total_view_time
+        description: Total time Snapchatters spent on the attachment (HH:MM:SS)
+      - name: attachment_view_completion
+        description: The number of times your Long Form Video was viewed to completion (97% )
+      - name: quartile_1
+        description: The number of times your video was viewed to 25% 
+      - name: quartile_2
+        description: The number of times your video was viewed to 50% 
+      - name: quartile_3
+        description: The number of times your video was viewed to 75% 
+      - name: saves
+        description: Number of times components of the campaign were saved to Memories
+      - name: shares
+        description: Number of times components of the campaign were shared in a Chat or Story
+      - name: screen_time
+        description: The number of seconds spent watching your campaign across all paid impressions. Screen time starts recording as soon as the media is fully rendered on the device and the autoplay video starts
+      - name: video_views
+        description: The number of times your video was watched at least 2 seconds or swiped up, whichever comes first
+      - name: view_completion
+        description: The number of times your video was viewed to completion (97% )
+      - name: view_time
+        description: The number of seconds spent watching your campaign across all users reached.
+      - name: impressions
+        description: The number of impressions for a campaign.
+      - name: spend
+        description: The amount of spend for a campaign.
+      - name: swipes
+        description: The number of swipes for a campaign. Swipes are when your ad was swiped up on or the CTA was tapped to view the attachment below.
+      - name: conversion_purchases_value
+        description: The total value of purchases attributed to a campaign.
+      - name: conversion_purchases
+        description: The total number of purchases attributed to a campaign for the day of the record.
