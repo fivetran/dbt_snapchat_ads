@@ -31,5 +31,6 @@ models:
       +materialized: ephemeral
     staging:
       +schema: snapchat_ads_source
+      +materialized: table
       tmp:
         +materialized: view
