@@ -1,4 +1,5 @@
-# Snapchat Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
+# Snapchat Ads dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
+
 <p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_snapchat_ads/blob/main/LICENSE">
@@ -9,10 +10,13 @@
         <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
+    <a alt="Fivetran Quickstart Compatible"
+        href="https://fivetran.com/docs/transformations/dbt/quickstart">
+        <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
 ## What does this dbt package do?
-- Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/snapchat-ads) in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/snapchat-ads#schemainformation) and builds off the output of our [Snapchat Ads source package](https://github.com/fivetran/dbt_snapchat_ads_source).
+- Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/snapchat-ads) in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/snapchat-ads#schemainformation).
 - Generates a comprehensive data dictionary of your source and modeled Snapchat Ads data through the [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/).
 - Enables you to better understand your marketing performance based on different levels of granularity:
 
@@ -57,15 +61,15 @@ If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_repor
 ```yml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=0.10.0", "<0.11.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=1.0.0", "<1.1.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
-Do NOT include the `snapchat_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
+> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/snapchat_ads_source` in your `packages.yml` since this package has been deprecated.
 
 ### Step 3: Configure your variables
 
 #### Define database and schema variables
-By default, this package runs using your destination and the `snapchat_ads_source` schema. If this is not where your Snapchat Ads data is (for example, if your Snapchat Ads schema is named `snapchat_ads_fivetran`), you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
+By default, this package runs using your destination and the `snapchat_ads` schema. If this is not where your Snapchat Ads data is (for example, if your Snapchat Ads schema is named `snapchat_ads_fivetran`), you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
 
 ```yml
 vars:
@@ -136,27 +140,25 @@ vars:
     snapchat_ads__conversion_fields: ['conversion_purchases', 'conversion_add_billing', 'conversion_save', 'conversion_add_cart']
 ```
 
-> We introduced support for conversion fields in our `*_report` data models in the [v0.7.0 release](https://github.com/fivetran/dbt_snapchat_ads_source/releases/tag/v0.7.0) of the package, but customers might have been bringing in these conversion fields earlier using the passthrough fields variables. The data models will avoid "duplicate column" errors automatically if this is the case.
-
 #### Change the source table references
 If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable. This is not available when running the package on multiple unioned connections.
 
-> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_snapchat_ads_source/blob/main/dbt_project.yml) variable declarations to see the expected names.
-    
+> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_snapchat_ads/blob/main/dbt_project.yml) variable declarations to see the expected names.
+
 ```yml
 vars:
     snapchat_ads_<default_source_table_name>_identifier: your_table_name 
 ```
-    
+
 #### Change the build schema
-By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_stg_snapchat_ads`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
+By default, this package builds the Snapchat Ads staging models within a schema titled (`<target_schema>` + `_snapchat_ads_source`) and your Snapchat Ads modeling models within a schema titled (`<target_schema>` + `_snapchat_ads`) in your destination. If this is not where you would like your Snapchat Ads data to be written to, add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 models:
-    snapchat_ads_source:
-      +schema: my_new_schema_name # leave blank for just the target_schema
     snapchat_ads:
-      +schema: my_new_schema_name # leave blank for just the target_schema
+      +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
+      staging:
+        +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
 ```
 
 </details>
@@ -164,7 +166,7 @@ models:
 ### (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>
 <br>
-    
+
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
 
 </details>
@@ -175,9 +177,6 @@ This dbt package is dependent on the following dbt packages. These dependencies 
 
 ```yml
 packages:
-    - package: fivetran/snapchat_ads_source
-      version: [">=0.9.0", "<0.10.0"]
-
     - package: fivetran/fivetran_utils
       version: [">=0.4.0", "<0.5.0"]
 

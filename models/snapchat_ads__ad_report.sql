@@ -8,7 +8,7 @@ with ad_hourly as (
         {% else %}
             0 as total_conversions
         {% endif %}
-    from {{ var('ad_hourly_report') }}
+    from {{ ref('stg_snapchat_ads__ad_hourly_report') }}
 
 ), creatives as (
 
@@ -18,25 +18,25 @@ with ad_hourly as (
 ), account as (
 
     select *
-    from {{ var('ad_account_history') }}
+    from {{ ref('stg_snapchat_ads__ad_account_history') }}
     where is_most_recent_record = true
 
 ), ads as (
 
     select *
-    from {{ var('ad_history') }}
+    from {{ ref('stg_snapchat_ads__ad_history') }}
     where is_most_recent_record = true
 
 ), ad_squads as (
 
     select *
-    from {{ var('ad_squad_history') }}
+    from {{ ref('stg_snapchat_ads__ad_squad_history') }}
     where is_most_recent_record = true
 
 ), campaigns as (
 
     select *
-    from {{ var('campaign_history') }}
+    from {{ ref('stg_snapchat_ads__campaign_history') }}
     where is_most_recent_record = true
 
 
