@@ -1,3 +1,10 @@
+# dbt_snapchat_ads v1.1.0
+
+[PR #44](https://github.com/fivetran/dbt_snapchat_ads/pull/44) includes the following updates:
+
+## Features
+  - Increases the required dbt version upper limit to v3.0.0
+
 # dbt_snapchat_ads v1.0.0
 
 [PR #41](https://github.com/fivetran/dbt_snapchat_ads/pull/41) includes the following updates:
