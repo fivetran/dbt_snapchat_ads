@@ -38,26 +38,26 @@ supported_vars:
 
   snapchat_ads__ad_hourly_passthrough_metrics:
     type: dictionary
-    description: "Addtional `AD_HOURLY_REPORT` columns to include in `snapchat_ads__ad_report`, `snapchat_ads__acount_report`, and `snapchat_ads__url_report`"
+    description: "Additional `AD_HOURLY_REPORT` columns to include in `snapchat_ads__ad_report`, `snapchat_ads__acount_report`, and `snapchat_ads__url_report`"
     display_name: "Additional Ad Report Metrics"
 
   snapchat_ads__ad_squad_hourly_passthrough_metrics:
     type: dictionary
-    description: "Addtional `AD_SQUAD_HOURLY_REPORT` columns to include in `snapchat_ads__ad_squad_report`"
+    description: "Additional `AD_SQUAD_HOURLY_REPORT` columns to include in `snapchat_ads__ad_squad_report`"
     display_name: "Additional Ad Squad Report Metrics"
 
   snapchat_ads__campaign_hourly_report_passthrough_metrics:
     type: dictionary
-    description: "Addtional `CAMPAIGN_HOURLY_REPORT` columns to include in `snapchat_ads__campaign_report`"
+    description: "Additional `CAMPAIGN_HOURLY_REPORT` columns to include in `snapchat_ads__campaign_report`"
     display_name: "Additional Campaign Report Metrics"
 
   snapchat_ads__campaign_daily_country_report_passthrough_metrics:
     type: dictionary
-    description: "Addtional `CAMPAIGN_GEO_COUNTRY_DAILY_REPORT` columns to include in `snapchat_ads__campaign_country_report`"
+    description: "Additional `CAMPAIGN_GEO_COUNTRY_DAILY_REPORT` columns to include in `snapchat_ads__campaign_country_report`"
     display_name: "Additional Campaign Country Report Metrics"
 
   snapchat_ads__campaign_daily_region_report_passthrough_metrics:
     type: dictionary
-    description: "Addtional `CAMPAIGN_GEO_REGION_DAILY_REPORT` columns to include in `snapchat_ads__campaign_region_report`"
+    description: "Additional `CAMPAIGN_GEO_REGION_DAILY_REPORT` columns to include in `snapchat_ads__campaign_region_report`"
     display_name: "Additional Campaign Region Report Metrics"
 
