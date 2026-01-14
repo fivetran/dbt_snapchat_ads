@@ -1,3 +1,15 @@
+# dbt_snapchat_ads v1.2.0
+
+[PR #45](https://github.com/fivetran/dbt_snapchat_ads/pull/45) includes the following updates:
+
+## Documentation
+- Updates README with standardized Fivetran formatting
+
+## Under the Hood
+- In the `.quickstart.yml` file:
+  - Adds `table_variables` for relevant sources to prevent missing sources from blocking downstream Quickstart models.
+  - Adds `supported_vars` for Quickstart UI customization,
+
 # dbt_snapchat_ads v1.1.0
 
 [PR #44](https://github.com/fivetran/dbt_snapchat_ads/pull/44) includes the following updates:
