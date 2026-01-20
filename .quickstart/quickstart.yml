@@ -15,6 +15,9 @@ table_variables:
   snapchat_ads__using_campaign_region_report:  
     - campaign_geo_region_daily_report
 
+  _fivetran_quickstart_creative_url_tag_history:
+    - creative_url_tag_history
+
 public_models: [
   "snapchat_ads__ad_report",
   "snapchat_ads__url_report",
@@ -24,3 +27,37 @@ public_models: [
   "snapchat_ads__campaign_country_report",
   "snapchat_ads__campaign_region_report"
 ]
+
+supported_vars:
+  snapchat_ads__conversion_fields:
+    type: list
+    value:
+      - "conversion_purchases"
+    description: "Report metrics that will be tracked as conversions"
+    display_name: "Conversion Metrics"
+
+  snapchat_ads__ad_hourly_passthrough_metrics:
+    type: dictionary
+    description: "Additional `AD_HOURLY_REPORT` columns to include in `snapchat_ads__ad_report`, `snapchat_ads__account_report`, and `snapchat_ads__url_report`"
+    display_name: "Additional Ad Report Metrics"
+
+  snapchat_ads__ad_squad_hourly_passthrough_metrics:
+    type: dictionary
+    description: "Additional `AD_SQUAD_HOURLY_REPORT` columns to include in `snapchat_ads__ad_squad_report`"
+    display_name: "Additional Ad Squad Report Metrics"
+
+  snapchat_ads__campaign_hourly_report_passthrough_metrics:
+    type: dictionary
+    description: "Additional `CAMPAIGN_HOURLY_REPORT` columns to include in `snapchat_ads__campaign_report`"
+    display_name: "Additional Campaign Report Metrics"
+
+  snapchat_ads__campaign_daily_country_report_passthrough_metrics:
+    type: dictionary
+    description: "Additional `CAMPAIGN_GEO_COUNTRY_DAILY_REPORT` columns to include in `snapchat_ads__campaign_country_report`"
+    display_name: "Additional Campaign Country Report Metrics"
+
+  snapchat_ads__campaign_daily_region_report_passthrough_metrics:
+    type: dictionary
+    description: "Additional `CAMPAIGN_GEO_REGION_DAILY_REPORT` columns to include in `snapchat_ads__campaign_region_report`"
+    display_name: "Additional Campaign Region Report Metrics"
+

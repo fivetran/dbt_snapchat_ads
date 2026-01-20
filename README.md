@@ -1,4 +1,5 @@
-# Snapchat Ads dbt Package ([Docs](https://fivetran.github.io/dbt_snapchat_ads/))
+<!--section="snapchat-ads_transformation_model"-->
+# Snapchat Ads dbt Package
 
 <p align="left">
     <a alt="License"
@@ -11,35 +12,55 @@
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
     <a alt="Fivetran Quickstart Compatible"
-        href="https://fivetran.com/docs/transformations/dbt/quickstart">
+        href="https://fivetran.com/docs/transformations/data-models/quickstart-management#quickstartmanagement">
         <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
+This dbt package transforms data from Fivetran's Snapchat Ads connector into analytics-ready tables.
+
+## Resources
+
+- Number of materialized models¹: 29
+- Connector documentation
+  - [Snapchat Ads connector documentation](https://fivetran.com/docs/connectors/applications/snapchat-ads)
+  - [Snapchat Ads ERD](https://fivetran.com/docs/connectors/applications/snapchat-ads#schemainformation)
+- dbt package documentation
+  - [GitHub repository](https://github.com/fivetran/dbt_snapchat_ads)
+  - [dbt Docs](https://fivetran.github.io/dbt_snapchat_ads/#!/overview)
+  - [DAG](https://fivetran.github.io/dbt_snapchat_ads/#!/overview?g_v=1)
+  - [Changelog](https://github.com/fivetran/dbt_snapchat_ads/blob/main/CHANGELOG.md)
+
 ## What does this dbt package do?
-- Produces modeled tables that leverage Snapchat Ads data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/snapchat-ads) in the format described by [this ERD](https://fivetran.com/docs/connectors/applications/snapchat-ads#schemainformation).
-- Generates a comprehensive data dictionary of your source and modeled Snapchat Ads data through the [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/).
-- Enables you to better understand your marketing performance based on different levels of granularity:
+This package enables you to produce modeled tables that leverage Snapchat Ads data, generate a comprehensive data dictionary, and better understand your marketing performance based on different levels of granularity.
 
-<!--section=“snapchat_ads_transformation_model"-->
+### Output schema
+Final output tables are generated in the following target schema:
 
-The following table provides a detailed list of all tables materialized within this package by default.
-> TIP: See more details about these tables in the package's [dbt docs site](https://fivetran.github.io/dbt_snapchat_ads/#!/overview?g_v=1&g_e=seeds).
+```
+<your_database>.<connector/schema_name>_snapchat_ads
+```
 
-| **Table** | **Details** |
-|-----------|-------------|
-| [`snapchat_ads__account_report`](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__account_report) | Represents daily performance aggregated at the account level, including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>How does performance compare across different accounts by account manager?</li><li>Are currency fluctuations affecting results across markets?</li></ul> |
-| [`snapchat_ads__campaign_report`](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_report) | Represents daily performance aggregated at the campaign level, including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which campaigns are most efficient in terms of cost per conversion?</li><li>Are paused or limited-status campaigns still accruing impressions?</li><li>Which campaigns contribute most to overall spend or conversions?</li></ul> |
-| [`snapchat_ads__ad_report`](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_report) | Represents daily performance at the individual ad level, including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which ad creatives are driving the lowest cost per swipe?</li><li>Do expanded text ads perform better than responsive search ads?</li><li>How do performance trends change after refreshing ad copy?</li></ul> |
-| [`snapchat_ads__url_report`](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__url_report) | Represents daily performance at the individual URL level, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with ad context.<br><br>**Example Analytics Questions:**<ul><li>Which landing pages are driving the highest conversion rates?</li><li>Are certain URLs performing better with specific ad creative combinations?</li></ul> |
-| [`snapchat_ads__ad_squad_report`](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report) | Represents daily performance aggregated at the ad squad level (equivalent to ad groups in other platforms), including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which ad squads have the strongest engagement relative to their budget?</li><li>Do certain ad squads dominate impressions within a campaign?</li><li>Are new ad squads ramping up as expected after launch?</li></ul> |
-| [`snapchat_ads__campaign_country_report`](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_country_report) | Represents daily performance aggregated at the campaign level by country, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which countries are delivering the highest return on ad spend for each campaign?</li><li>Are there seasonal performance variations by geographic region?</li></ul> |
-| [`snapchat_ads__campaign_region_report`](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_region_report) | Represents daily performance aggregated at the campaign level by region, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which regions are driving the most efficient campaign performance?</li><li>How do regional performance trends correlate with local market conditions?</li></ul> |
+### Final output tables
+
+By default, this package materializes the following final tables:
+
+| Table | Description |
+| :---- | :---- |
+| [snapchat_ads__account_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__account_report) | Represents daily performance aggregated at the account level, including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>How does performance compare across different accounts by account manager?</li><li>Are currency fluctuations affecting results across markets?</li></ul> |
+| [snapchat_ads__campaign_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_report) | Represents daily performance aggregated at the campaign level, including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which campaigns are most efficient in terms of cost per conversion?</li><li>Are paused or limited-status campaigns still accruing impressions?</li><li>Which campaigns contribute most to overall spend or conversions?</li></ul> |
+| [snapchat_ads__ad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_report) | Represents daily performance at the individual ad level, including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which ad creatives are driving the lowest cost per swipe?</li><li>Do expanded text ads perform better than responsive search ads?</li><li>How do performance trends change after refreshing ad copy?</li></ul> |
+| [snapchat_ads__url_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__url_report) | Represents daily performance at the individual URL level, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with ad context.<br><br>**Example Analytics Questions:**<ul><li>Which landing pages are driving the highest conversion rates?</li><li>Are certain URLs performing better with specific ad creative combinations?</li></ul> |
+| [snapchat_ads__ad_squad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report) | Represents daily performance aggregated at the ad squad level (equivalent to ad groups in other platforms), including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which ad squads have the strongest engagement relative to their budget?</li><li>Do certain ad squads dominate impressions within a campaign?</li><li>Are new ad squads ramping up as expected after launch?</li></ul> |
+| [snapchat_ads__campaign_country_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_country_report) | Represents daily performance aggregated at the campaign level by country, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which countries are delivering the highest return on ad spend for each campaign?</li><li>Are there seasonal performance variations by geographic region?</li></ul> |
+| [snapchat_ads__campaign_region_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_region_report) | Represents daily performance aggregated at the campaign level by region, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which regions are driving the most efficient campaign performance?</li><li>How do regional performance trends correlate with local market conditions?</li></ul> |
+
+¹ Each Quickstart transformation job run materializes these models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
+
+---
+
+## Visualizations
 
 Many of the above reports are now configurable for [visualization via Streamlit](https://github.com/fivetran/streamlit_ad_reporting). Check out some [sample reports here](https://fivetran-ad-reporting.streamlit.app/ad_performance).
-
-### Example Visualizations
-
-Curious what these tables can do? The Snapchat Ads models provide advertising performance data that can be visualized to track key metrics like spend, impressions, click-through rates, conversion rates, and return on ad spend across different campaign structures and time periods. Check out example visualizations in the [Fivetran Ad Reporting Streamlit App](https://fivetran-ad-reporting.streamlit.app/ad_performance), and see how you can use these tables in your own reporting. Below is a screenshot of an example dashboard; explore the app for more.
 
 <p align="center">
   <a href="https://fivetran-ad-reporting.streamlit.app/ad_performance">
@@ -47,17 +68,30 @@ Curious what these tables can do? The Snapchat Ads models provide advertising pe
   </a>
 </p>
 
-### Materialized Models
-Each Quickstart transformation job run materializes 29 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
-<!--section-end-->
-
-## How do I use the dbt package?
-
-### Step 1: Prerequisites
+## Prerequisites
 To use this dbt package, you must have the following:
 
 - At least one Fivetran Snapchat Ads connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **Databricks**, or **PostgreSQL** destination.
+
+## How do I use the dbt package?
+You can either add this dbt package in the Fivetran dashboard or import it into your dbt project:
+
+- To add the package in the Fivetran dashboard, follow our [Quickstart guide](https://fivetran.com/docs/transformations/data-models/quickstart-management).
+- To add the package to your dbt project, follow the setup instructions in the dbt package's [README file](https://github.com/fivetran/dbt_snapchat_ads/blob/main/README.md#how-do-i-use-the-dbt-package) to use this package.
+
+<!--section-end-->
+
+### Install the package  (skip if also using the `ad_reporting` combination package)
+If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_reporting) combination package, include the following Snapchat Ads package version in your `packages.yml` file:
+> TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
+```yml
+packages:
+  - package: fivetran/snapchat_ads
+    version: [">=1.2.0", "<1.3.0"] # we recommend using ranges to capture non-breaking changes automatically
+```
+
+> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/snapchat_ads_source` in your `packages.yml` since this package has been deprecated.
 
 #### Databricks Dispatch Configuration
 If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
@@ -67,18 +101,7 @@ dispatch:
     search_order: ['spark_utils', 'dbt_utils']
 ```
 
-### Step 2: Install the package  (skip if also using the `ad_reporting` combination package)
-If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_reporting) combination package, include the following Snapchat Ads package version in your `packages.yml` file:
-> TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
-```yml
-packages:
-  - package: fivetran/snapchat_ads
-    version: [">=1.1.0", "<1.2.0"] # we recommend using ranges to capture non-breaking changes automatically
-```
-
-> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/snapchat_ads_source` in your `packages.yml` since this package has been deprecated.
-
-### Step 3: Configure your variables
+### Configure your variables
 
 #### Define database and schema variables
 By default, this package runs using your destination and the `snapchat_ads` schema. If this is not where your Snapchat Ads data is (for example, if your Snapchat Ads schema is named `snapchat_ads_fivetran`), you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
@@ -89,7 +112,7 @@ vars:
     snapchat_ads_schema: your_schema_name 
 ```
 
-### (Optional) Step 4: Additional configurations
+### (Optional) Additional configurations
 <details open><summary>Expand/Collapse details</summary>
 
 #### Enabling models that are disabled by default
@@ -175,11 +198,11 @@ models:
 
 </details>
 
-### (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
+### (Optional) Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>
 <br>
 
-Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
+Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt#transformationsfordbtcore). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt/setup-guide#transformationsfordbtcoresetupguide).
 
 </details>
 
@@ -198,9 +221,12 @@ packages:
     - package: dbt-labs/spark_utils
       version: [">=0.3.0", "<0.4.0"]
 ```
+
+<!--section="snapchat-ads_maintenance"-->
 ## How is this package maintained and can I contribute?
+
 ### Package Maintenance
-The Fivetran team maintaining this package _only_ maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://hub.getdbt.com/fivetran/snapchat_ads/latest/) of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_snapchat_ads/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
+The Fivetran team maintaining this package only maintains the [latest version](https://hub.getdbt.com/fivetran/snapchat_ads/latest/) of the package. We highly recommend you stay consistent with the latest version of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_snapchat_ads/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
 
 ### Opinionated Decisions
 In creating this package, which is meant for a wide range of use cases, we had to take opinionated stances on a few different questions we came across during development. We've consolidated significant choices we made in the [DECISIONLOG.md](https://github.com/fivetran/dbt_snapchat_ads/blob/main/DECISIONLOG.md), and will continue to update as the package evolves. We are always open to and encourage feedback on these choices, and the package in general.
@@ -208,12 +234,14 @@ In creating this package, which is meant for a wide range of use cases, we had t
 ### Contributions
 A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions.
 
-We highly encourage and welcome contributions to this package. Check out [this dbt Discourse article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package.
+We highly encourage and welcome contributions to this package. Learn how to contribute to a package in dbt's [Contributing to an external dbt package article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657).
 
 #### Contributors
 We thank [everyone](https://github.com/fivetran/dbt_snapchat_ads/graphs/contributors) who has taken the time to contribute. Each PR, bug report, and feature request has made this package better and is truly appreciated.
 
 A special thank you to [Seer Interactive](https://www.seerinteractive.com/?utm_campaign=Fivetran%20%7C%20Models&utm_source=Fivetran&utm_medium=Fivetran%20Documentation), who we closely collaborated with to introduce native conversion support to our Ad packages.
+
+<!--section-end-->
 
 ## Are there any resources available?
 - If you have questions or want to reach out for help, see the [GitHub Issue](https://github.com/fivetran/dbt_snapchat_ads/issues/new/choose) section to find the right avenue of support for you.
