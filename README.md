@@ -162,6 +162,14 @@ vars:
     snapchat_ads__conversion_fields: ['conversion_purchases', 'conversion_add_billing', 'conversion_save', 'conversion_add_cart']
 ```
 
+#### Disable the URL null filter
+By default, the `snapchat_ads_url_report` model will filter out records where the URL field is null. If you would like to include these records in your final model, add the following configuration to your root `dbt_project.yml` file:
+
+```yml
+vars:
+    ad_reporting__url_report__using_null_filter: false # Default value is true
+```
+
 #### Change the source table references
 If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable. This is not available when running the package on multiple unioned connections.
 
