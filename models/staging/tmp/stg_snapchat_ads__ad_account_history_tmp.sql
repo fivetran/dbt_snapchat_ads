@@ -1,5 +1,7 @@
 {{ config(enabled=var('ad_reporting__snapchat_ads_enabled', true)) }}
 
+{% if var('snapchat_ads_union_schemas', []) | length > 0 or var('snapchat_ads_union_databases', []) | length > 0 %}
+
 {{
     fivetran_utils.union_data(
         table_identifier='ad_account_history', 
@@ -12,3 +14,15 @@
         union_database_variable='snapchat_ads_union_databases'
     )
 }}
+
+{% else %}
+
+{{
+    fivetran_utils.union_connections(
+        connection_dictionary='snapchat_ads_sources',
+        single_source_name='snapchat_ads',
+        single_table_name='ad_account_history'
+    )
+}}
+
+{% endif %}

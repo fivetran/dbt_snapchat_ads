@@ -75,7 +75,7 @@ If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_repor
 ```yml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=1.2.0", "<1.3.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=1.3.0", "<1.4.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/snapchat_ads_source` in your `packages.yml` since this package has been deprecated.
@@ -90,14 +90,41 @@ dispatch:
 
 ### Configure your variables
 
-#### Define database and schema variables
-By default, this package runs using your destination and the `snapchat_ads` schema. If this is not where your Snapchat Ads data is (for example, if your Snapchat Ads schema is named `snapchat_ads_fivetran`), you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
+### Define database and schema variables
+#### Option A: Single connection
+By default, this package runs using your destination and the `snapchat_ads` schema. If this is not where your Snapchat Ads data is (for example, if your Snapchat Ads schema is named `snapchat_ads_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 vars:
     snapchat_ads_database: your_destination_name
-    snapchat_ads_schema: your_schema_name 
+    snapchat_ads_schema: your_schema_name
 ```
+
+#### Option B: Union multiple connections
+If you have multiple Snapchat Ads connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. For each source table, the package will union all of the data together and pass the unioned table into the transformations. The `source_relation` column in each model indicates the origin of each record.
+
+To use this functionality, you will need to set the `snapchat_ads_sources` variable in your root `dbt_project.yml` file:
+
+```yml
+# dbt_project.yml
+
+vars:
+  snapchat_ads:
+    snapchat_ads_sources:
+      - database: connection_1_destination_name # Required
+        schema: connection_1_schema_name # Required
+        name: connection_1_source_name # Required only if following the step in the following subsection
+
+      - database: connection_2_destination_name
+        schema: connection_2_schema_name
+        name: connection_2_source_name
+```
+
+> Previous versions of this package employed two separate, mutually exclusive variables for unioning: `snapchat_ads_union_schemas` and `snapchat_ads_union_databases`. While these variables are still supported, `snapchat_ads_sources` is the recommended variable to configure.
+
+#### Optional: Incorporate unioned sources into DAG
+
+If you use [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt#transformationsfordbtcore) and are unioning multiple Snapchat Ads connections, you can define your sources in a property `.yml` file, [using this as a template](https://github.com/fivetran/dbt_snapchat_ads/blob/main/models/staging/src_snapchat_ads.yml). Set the variable `has_defined_sources: true` under the Snapchat Ads namespace in your `dbt_project.yml`. Otherwise, your Snapchat Ads connections won't appear in your DAG. See the `union_connections` macro [documentation](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#optional-union-connections-defined-sources-configuration) for full configuration details.
 
 ### (Optional) Additional configurations
 <details open><summary>Expand/Collapse details</summary>
@@ -110,18 +137,6 @@ vars:
     snapchat_ads__using_campaign_country_report: true # Enables the snapchat_ads__campaign_country_report model. False by default. Requires the campaign_geo_country_daily_report source table.
     snapchat_ads__using_campaign_region_report: true # Enables the snapchat_ads__campaign_region_report. False by default. Requires the campaign_geo_region_daily_report source table.
 ```
-
-#### Union multiple connections
-If you have multiple snapchat_ads connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `snapchat_ads_union_schemas` OR `snapchat_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
-
-```yml
-vars:
-    snapchat_ads_union_schemas: ['snapchat_ads_usa','snapchat_ads_canada'] # use this if the data is in different schemas/datasets of the same database/project
-    snapchat_ads_union_databases: ['snapchat_ads_usa','snapchat_ads_canada'] # use this if the data is in different databases/projects but uses the same schema name
-```
-> NOTE: The native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
-
-To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
 #### Passing Through Additional Metrics
 By default, this package will select `swipes`, `impressions`, `spend`, `conversion_purchases_value`, and `total_conversions` (as well as fields set via `snapchat_ads__conversion_fields` in the next section) from the source reporting tables to store into the staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) if desired, but not required. Use the below format for declaring the respective pass-through variables:
@@ -178,6 +193,14 @@ If an individual source table has a different name than the package expects, add
 ```yml
 vars:
     snapchat_ads_<default_source_table_name>_identifier: your_table_name 
+```
+
+#### Source casing for case-sensitive destinations
+By default, the package applies case-insensitive comparisons when resolving `source_relation` values. If your destination is case-sensitive and you want downstream transformations to respect the exact casing of your source database and schema names, set the following variable:
+
+```yml
+vars:
+    fivetran_using_source_casing: true
 ```
 
 #### Change the build schema
