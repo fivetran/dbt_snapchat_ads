@@ -16,10 +16,7 @@ fields as (
             )
         }}
     
-        {{ fivetran_utils.source_relation(
-            union_schema_variable='snapchat_ads_union_schemas', 
-            union_database_variable='snapchat_ads_union_databases') 
-        }}
+        {{ fivetran_utils.apply_source_relation(package_name='snapchat_ads') }}
 
     from base
 ),
@@ -34,7 +31,7 @@ final as (
         campaign_id,
         cast (_fivetran_synced as {{ dbt.type_timestamp() }}) as _fivetran_synced,
         cast (updated_at as {{ dbt.type_timestamp() }}) as updated_at,
-        row_number() over (partition by source_relation, id order by _fivetran_synced desc) = 1 as is_most_recent_record
+        row_number() over (partition by id {{ fivetran_utils.partition_by_source_relation(package_name='snapchat_ads') }} order by _fivetran_synced desc) = 1 as is_most_recent_record
     from fields
 )
 
