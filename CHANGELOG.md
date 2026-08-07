@@ -1,3 +1,11 @@
+# dbt_snapchat_ads v1.3.1
+
+[PR #53](https://github.com/fivetran/dbt_snapchat_ads/pull/53) includes the following updates:
+
+## Feature Updates
+- Adds DuckDB as a supported destination.
+
+
 # dbt_snapchat_ads v1.3.0
 
 [PR #50](https://github.com/fivetran/dbt_snapchat_ads/pull/50) includes the following updates:
