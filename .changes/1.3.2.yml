@@ -1,4 +1,5 @@
 version: 1.3.2
+pr_number: 57
 under_the_hood:
 - description: Replaces the `snapchat_ads_extract_url_parameter` macro with `dbt_utils.get_url_parameter` and
     removes `snapchat_ads_extract_url_parameter`. `dbt_utils.get_url_parameter` now includes the
