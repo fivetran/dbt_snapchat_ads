@@ -3,6 +3,13 @@ version: 2
 models:
   - name: stg_snapchat_ads__ad_account_history
     description: Each record in this table represents a historic version of an ad account in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - ad_account_id
+              - _fivetran_synced
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -31,6 +38,13 @@ models:
 
   - name: stg_snapchat_ads__ad_history
     description: Each record in this table represents a historic version of an ad in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - ad_id
+              - _fivetran_synced
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -57,6 +71,13 @@ models:
 
   - name: stg_snapchat_ads__ad_hourly_report
     description: Each record represents an hourly performance summary for an ad in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_hour
+              - ad_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -109,6 +130,13 @@ models:
 
   - name: stg_snapchat_ads__ad_squad_history
     description: Each record in this table represents a historic version of an ad squad in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - ad_squad_id
+              - _fivetran_synced
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -133,6 +161,13 @@ models:
 
   - name: stg_snapchat_ads__ad_squad_hourly_report
     description: Each record in this table represents a historic version of an ad in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_hour
+              - ad_squad_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -185,6 +220,13 @@ models:
 
   - name: stg_snapchat_ads__campaign_history
     description: Each record in this table represents a historic version of a campaign in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - campaign_id
+              - _fivetran_synced
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -221,6 +263,13 @@ models:
 
   - name: stg_snapchat_ads__campaign_hourly_report
     description: Each record in this table represents a historic version of an ad in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_hour
+              - campaign_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -273,6 +322,13 @@ models:
 
   - name: stg_snapchat_ads__creative_history
     description: Each record in this table represents a historic version of a creative in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - creative_id
+              - _fivetran_synced
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -299,6 +355,14 @@ models:
 
   - name: stg_snapchat_ads__creative_url_tag_history
     description: Each record in this table represents a URL paramter key-value pair for a creative in Snapchat.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - creative_id
+              - param_key
+              - updated_at
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -317,6 +381,14 @@ models:
 
   - name: stg_snapchat_ads__campaign_geo_country_daily_report
     description: Each record represents a daily performance summary per country for each campaign.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - campaign_id
+              - country
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -374,6 +446,14 @@ models:
 
   - name: stg_snapchat_ads__campaign_geo_region_daily_report
     description: Each record represents a daily performance summary per region for each campaign.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - campaign_id
+              - region
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
