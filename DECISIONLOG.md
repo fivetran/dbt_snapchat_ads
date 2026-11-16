@@ -33,3 +33,11 @@ We filter for `is_most_recent_record` using `_fivetran_synced` rather than `upda
 
 ## Selecting which columns to include from the source tables
 Snapchat passes many fields; in order to eliminate clutter we made a judgement call on which fields to include in our models. For fields that you wish to use that aren't included by default, refer to the [passthrough column feature](https://github.com/fivetran/dbt_snapchat_ads/blob/feature/v2_updates/README.md#passing-through-additional-metrics). 
+
+## Age and gender reports
+`snapchat_ads__campaign_age_report` and `snapchat_ads__campaign_gender_report` both come from the `campaign_demographic_daily_report` source table. Each source row covers one campaign, day, age range, and gender. The age report sums across genders, and the gender report sums across age ranges.
+
+Snapchat reports audience age as a range string, such as `18-20`. The oldest range is open-ended, such as `35+`. We keep the raw `age_bucket` value and parse it into `min_age` and `max_age` integer columns:
+- A range such as `18-20` maps to `min_age = 18` and `max_age = 20`.
+- An open-ended range such as `35+` maps to `min_age = 35` and `max_age = 100`. We use 100 as the upper bound so you can filter and bucket ages with `between min_age and max_age`.
+- Any other value gets `null` for both.

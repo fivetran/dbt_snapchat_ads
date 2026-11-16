@@ -5,7 +5,7 @@ This dbt package transforms data from Fivetran's Snapchat Ads connector into ana
 
 ## Resources
 
-- Number of materialized models¹: 29
+- Number of materialized models¹: 33
 - Connector documentation
   - [Snapchat Ads connector documentation](https://fivetran.com/docs/connectors/applications/snapchat-ads)
   - [Snapchat Ads ERD](https://fivetran.com/docs/connectors/applications/snapchat-ads#schemainformation)
@@ -40,6 +40,8 @@ By default, this package materializes the following final tables:
 | [snapchat_ads__ad_squad_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__ad_squad_report) | Represents daily performance aggregated at the ad squad level (equivalent to ad groups in other platforms), including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which ad squads have the strongest engagement relative to their budget?</li><li>Do certain ad squads dominate impressions within a campaign?</li><li>Are new ad squads ramping up as expected after launch?</li></ul> |
 | [snapchat_ads__campaign_country_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_country_report) | Represents daily performance aggregated at the campaign level by country, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which countries are delivering the highest return on ad spend for each campaign?</li><li>Are there seasonal performance variations by geographic region?</li></ul> |
 | [snapchat_ads__campaign_region_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_region_report) | Represents daily performance aggregated at the campaign level by region, including `spend`, `swipes`, `impressions`, and `total_conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which regions are driving the most efficient campaign performance?</li><li>How do regional performance trends correlate with local market conditions?</li></ul> |
+| [snapchat_ads__campaign_age_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_age_report) | Represents daily performance aggregated at the campaign level by audience age range, including `spend`, `swipes`, `impressions`, and `total_conversions`. The model splits each age range into `min_age` and `max_age`.<br><br>**Example Analytics Questions:**<ul><li>Which age ranges convert at the lowest cost for each campaign?</li><li>Is spend shifting toward younger or older audiences over time?</li></ul> |
+| [snapchat_ads__campaign_gender_report](https://fivetran.github.io/dbt_snapchat_ads/#!/model/model.snapchat_ads.snapchat_ads__campaign_gender_report) | Represents daily performance aggregated at the campaign level by audience gender, including `spend`, `swipes`, `impressions`, and `total_conversions`.<br><br>**Example Analytics Questions:**<ul><li>How does cost per conversion differ by gender for each campaign?</li><li>Which campaigns reach a balanced gender mix?</li></ul> |
 
 ¹ Each Quickstart transformation job run materializes these models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
 
@@ -75,7 +77,7 @@ If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_repor
 ```yml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=1.3.0", "<1.4.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=1.4.0", "<1.5.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/snapchat_ads_source` in your `packages.yml` since this package has been deprecated.
@@ -136,6 +138,7 @@ For certain models, we have disabled them by default because of a smaller percen
 vars:
     snapchat_ads__using_campaign_country_report: true # Enables the snapchat_ads__campaign_country_report model. False by default. Requires the campaign_geo_country_daily_report source table.
     snapchat_ads__using_campaign_region_report: true # Enables the snapchat_ads__campaign_region_report. False by default. Requires the campaign_geo_region_daily_report source table.
+    snapchat_ads__using_campaign_demographic_report: true # Enables the snapchat_ads__campaign_age_report and snapchat_ads__campaign_gender_report models. False by default. Requires the campaign_demographic_daily_report source table.
 ```
 
 #### Passing Through Additional Metrics
@@ -160,9 +163,11 @@ vars:
       - name: "new_measure_country_report"
     snapchat_ads__campaign_daily_region_report_passthrough_metrics: # sources from the campaign_geo_region_daily_report table. Persists through to snapchat_ads__campaign_region_report.
       - name: "new_measure_region_report"
+    snapchat_ads__campaign_daily_demographic_report_passthrough_metrics: # sources from the campaign_demographic_daily_report table. Persists through to snapchat_ads__campaign_age_report and snapchat_ads__campaign_gender_report.
+      - name: "new_measure_demographic_report"
 ```
 
->**Note**: Make sure to exercise due diligence when adding metrics to these models. The metrics added by default (swipes, impressions, spend, and conversions) have been vetted by the Fivetran team, maintaining this package for accuracy. There are metrics included within the source reports, such as metric averages, which may be inaccurately represented at the grain for reports created in this package. You must ensure that whichever metrics you pass through are appropriate to aggregate at the respective reporting levels in this package.
+>**Note**: Make sure to exercise due diligence when adding metrics to these models. The metrics added by default (swipes, impressions, spend, and conversions) have been vetted by the Fivetran team, maintaining this package for accuracy. There are metrics included within the source reports, such as metric averages, which may be inaccurately represented at the grain for reports created in this package. You must ensure that whichever metrics you pass through are appropriate to aggregate at the respective reporting levels in this package. For example, the age and gender reports sum passthrough metrics across genders and age ranges, so averages such as `avg_screen_time_millis` and ratios such as `swipe_up_percent` are not accurate there.
 
 **Important**: You do NOT need to add conversions in this way. See the following section for an alternative implementation.
 

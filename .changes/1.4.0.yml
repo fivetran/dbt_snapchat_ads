@@ -1,0 +1,21 @@
+version: 1.4.0
+schema_data_changes:
+  entries:
+    - models:
+        - snapchat_ads__campaign_age_report
+        - snapchat_ads__campaign_gender_report
+      change_type: New field/model
+      is_breaking: false
+      notes: Daily campaign performance by audience age range and by gender. Built from the `CAMPAIGN_DEMOGRAPHIC_DAILY_REPORT` source table. The age report splits each age range into `min_age` and `max_age`. Dynamically enabled in Quickstart; disabled by default otherwise. To enable in self-managed dbt projects, set the `snapchat_ads__using_campaign_demographic_report` variable to `true`.
+    - models:
+        - stg_snapchat_ads__campaign_demographic_daily_report
+        - stg_snapchat_ads__campaign_demographic_daily_report_tmp
+      change_type: New field/model
+      is_breaking: false
+      notes: Staging models to support age and gender reporting.
+new_features:
+  - title: Age and gender reporting variables
+    description: Adds two new variables for the `CAMPAIGN_DEMOGRAPHIC_DAILY_REPORT` source table.
+    details:
+      - "`snapchat_ads__using_campaign_demographic_report` enables the age and gender reports. False by default."
+      - "`snapchat_ads__campaign_daily_demographic_report_passthrough_metrics` passes additional metrics through to `snapchat_ads__campaign_age_report` and `snapchat_ads__campaign_gender_report`."
