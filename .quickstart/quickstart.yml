@@ -14,6 +14,8 @@ table_variables:
     - campaign_geo_country_daily_report
   snapchat_ads__using_campaign_region_report:  
     - campaign_geo_region_daily_report
+  snapchat_ads__using_campaign_demographic_report:
+    - campaign_demographic_daily_report
 
   _fivetran_quickstart_creative_url_tag_history:
     - creative_url_tag_history
@@ -25,7 +27,9 @@ public_models: [
   "snapchat_ads__ad_squad_report",
   "snapchat_ads__campaign_report",
   "snapchat_ads__campaign_country_report",
-  "snapchat_ads__campaign_region_report"
+  "snapchat_ads__campaign_region_report",
+  "snapchat_ads__campaign_age_report",
+  "snapchat_ads__campaign_gender_report"
 ]
 
 supported_vars:
@@ -61,3 +65,7 @@ supported_vars:
     description: "Additional `CAMPAIGN_GEO_REGION_DAILY_REPORT` columns to include in `snapchat_ads__campaign_region_report`"
     display_name: "Additional Campaign Region Report Metrics"
 
+  snapchat_ads__campaign_daily_demographic_report_passthrough_metrics:
+    type: dictionary
+    description: "Additional `CAMPAIGN_DEMOGRAPHIC_DAILY_REPORT` columns to include in `snapchat_ads__campaign_age_report` and `snapchat_ads__campaign_gender_report`"
+    display_name: "Additional Campaign Demographic Report Metrics"

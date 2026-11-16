@@ -323,3 +323,116 @@ models:
         description: The objective of the campaign (e.g., BRAND_AWARENESS, APP_INSTALL, etc.).
       - name: campaign_lifetime_spend_cap
         description: Lifetime spend cap for the campaign (converted from microcurrency).
+
+  - name: snapchat_ads__campaign_age_report
+    description: Each record represents the daily performance of a Snapchat campaign per audience age bucket.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: date_day
+        description: The date of the report.
+        tests:
+          - not_null
+      - name: campaign_id
+        description: The ID of the campaign in Snapchat.
+        tests:
+          - not_null
+      - name: age_bucket
+        description: "{{ doc('age_bucket') }}"
+      - name: min_age
+        description: "{{ doc('min_age') }}"
+      - name: max_age
+        description: "{{ doc('max_age') }}"
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: campaign_name
+        description: The name of the campaign in Snapchat.
+      - name: currency
+        description: The currency used by the account in Snapchat.
+      - name: spend
+        description: The spend on the campaign in the given day.
+      - name: impressions
+        description: The number of impressions the campaign had on the given day.
+      - name: swipes
+        description: The number of swipes the campaign had on the given day.
+      - name: shares
+        description: Number of times components of the campaign were shared.
+      - name: saves
+        description: Number of times components of the campaign were saved to Memories.
+      - name: total_conversions
+        description: The total conversions being brought in the conversion fields you select in your `snapchat_ads__conversion_fields`.
+      - name: conversion_purchases
+        description: The total number of purchases for the campaign on the given day.
+      - name: conversion_purchases_value
+        description: The total value of purchases for the campaign on the given day.
+      - name: created_at
+        description: Timestamp of when the campaign was created.
+      - name: campaign_daily_budget
+        description: Daily spend cap for the campaign (converted from microcurrency).
+      - name: start_time
+        description: The start time of the campaign.
+      - name: end_time
+        description: The end time of the campaign.
+      - name: status
+        description: Campaign status (e.g., ACTIVE, PAUSED, ARCHIVED).
+      - name: objective
+        description: The objective of the campaign (e.g., BRAND_AWARENESS, APP_INSTALL, etc.).
+      - name: campaign_lifetime_spend_cap
+        description: Lifetime spend cap for the campaign (converted from microcurrency).
+
+
+  - name: snapchat_ads__campaign_gender_report
+    description: Each record represents the daily performance of a Snapchat campaign per audience gender.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: date_day
+        description: The date of the report.
+        tests:
+          - not_null
+      - name: campaign_id
+        description: The ID of the campaign in Snapchat.
+        tests:
+          - not_null
+      - name: gender
+        description: "{{ doc('gender') }}"
+      - name: ad_account_id
+        description: The ID of the account in Snapchat.
+      - name: ad_account_name
+        description: The name of the account in Snapchat.
+      - name: campaign_name
+        description: The name of the campaign in Snapchat.
+      - name: currency
+        description: The currency used by the account in Snapchat.
+      - name: spend
+        description: The spend on the campaign in the given day.
+      - name: impressions
+        description: The number of impressions the campaign had on the given day.
+      - name: swipes
+        description: The number of swipes the campaign had on the given day.
+      - name: shares
+        description: Number of times components of the campaign were shared.
+      - name: saves
+        description: Number of times components of the campaign were saved to Memories.
+      - name: total_conversions
+        description: The total conversions being brought in the conversion fields you select in your `snapchat_ads__conversion_fields`.
+      - name: conversion_purchases
+        description: The total number of purchases for the campaign on the given day.
+      - name: conversion_purchases_value
+        description: The total value of purchases for the campaign on the given day.
+      - name: created_at
+        description: Timestamp of when the campaign was created.
+      - name: campaign_daily_budget
+        description: Daily spend cap for the campaign (converted from microcurrency).
+      - name: start_time
+        description: The start time of the campaign.
+      - name: end_time
+        description: The end time of the campaign.
+      - name: status
+        description: Campaign status (e.g., ACTIVE, PAUSED, ARCHIVED).
+      - name: objective
+        description: The objective of the campaign (e.g., BRAND_AWARENESS, APP_INSTALL, etc.).
+      - name: campaign_lifetime_spend_cap
+        description: Lifetime spend cap for the campaign (converted from microcurrency).

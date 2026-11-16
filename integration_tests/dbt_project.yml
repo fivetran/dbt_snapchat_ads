@@ -1,11 +1,12 @@
 name: 'snapchat_ads_integration_tests'
-version: '1.3.1'
+version: '1.4.0'
 profile: 'integration_tests'
 config-version: 2
 
 vars:
   # snapchat_ads__using_campaign_country_report: true # @docs-include
   # snapchat_ads__using_campaign_region_report: true # @docs-include
+  # snapchat_ads__using_campaign_demographic_report: true # @docs-include
   snapchat_ads:
     snapchat_ads_schema: snapchat_ads_integration_tests
     snapchat_ads_ad_account_history_identifier: "snapchat_ad_account_history_data"
@@ -19,6 +20,7 @@ vars:
     snapchat_ads_creative_url_tag_history_identifier: "snapchat_creative_url_tag_history_data"
     snapchat_ads_campaign_geo_region_daily_report_identifier: "snapchat_campaign_geo_region_daily_report_data"
     snapchat_ads_campaign_geo_country_daily_report_identifier: "snapchat_campaign_geo_country_daily_report_data"
+    snapchat_ads_campaign_demographic_daily_report_identifier: "snapchat_campaign_demographic_daily_report_data"
 
 dispatch:
   - macro_namespace: dbt_utils
