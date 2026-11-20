@@ -15,7 +15,7 @@ This dbt package transforms data from Fivetran's Snapchat Ads connector into ana
   - [DAG](https://fivetran.github.io/dbt_snapchat_ads/#!/overview?g_v=1)
   - [Changelog](https://github.com/fivetran/dbt_snapchat_ads/blob/main/CHANGELOG.md)
 - dbt Core™ supported versions
-  - `>=1.3.0, <3.0.0`
+  - `>=1.10.0, <3.0.0`
 
 ## What does this dbt package do?
 This package enables you to produce modeled tables that leverage Snapchat Ads data, generate a comprehensive data dictionary, and better understand your marketing performance based on different levels of granularity.
@@ -75,7 +75,7 @@ If you are not using the [Ad Reporting](https://github.com/fivetran/dbt_ad_repor
 ```yml
 packages:
   - package: fivetran/snapchat_ads
-    version: [">=1.3.0", "<1.4.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=1.4.0", "<1.5.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/snapchat_ads_source` in your `packages.yml` since this package has been deprecated.
@@ -249,7 +249,7 @@ The Fivetran team maintaining this package only maintains the [latest version](h
 ### Contributions
 A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions.
 
-We highly encourage and welcome contributions to this package. Learn how to contribute to a package in dbt's [Contributing to an external dbt package article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657).
+We highly encourage and welcome contributions to this package. Learn how to contribute to a package by reading the guidelines in our [CONTRIBUTING.md](https://github.com/fivetran/dbt_snapchat_ads/blob/main/CONTRIBUTING.md) document.
 
 #### Contributors
 We thank [everyone](https://github.com/fivetran/dbt_snapchat_ads/graphs/contributors) who has taken the time to contribute. Each PR, bug report, and feature request has made this package better and is truly appreciated.
