@@ -15,11 +15,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The date of the report.
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_id
         description: The ID of the account in Snapchat.
-        tests:
+        data_tests:
           - not_null:
               config:
                 severity: warn
@@ -56,11 +56,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The date of the report.
-        tests:
+        data_tests:
           - not_null
       - name: ad_id
         description: The ID of the ad in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_id
         description: The ID of the account in Snapchat.
@@ -105,11 +105,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The date of the report.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: The ID of the campaign in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_id
         description: The ID of the account in Snapchat.
@@ -146,11 +146,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The date of the report.
-        tests:
+        data_tests:
           - not_null
       - name: ad_squad_id
         description: The ID of the ad squad in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_id
         description: The ID of the account in Snapchat.
@@ -197,11 +197,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The date of the report.
-        tests:
+        data_tests:
           - not_null
       - name: ad_id
         description: The ID of the ad in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: ad_squad_id
         description: The ID of the ad squad in Snapchat.
@@ -221,7 +221,7 @@ models:
         description: The currency used by the account in Snapchat.
       - name: base_url
         description: The base URL of the ad, extracted from the web_view_url.
-        tests:
+        data_tests:
           - not_null:
               config:
                 # Below is so we don't run this test if the user has allowed urls to have null entries
@@ -268,15 +268,15 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The date of the report.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: The ID of the campaign in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: country
         description: The country where the campaign was delivered.
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_id
         description: The ID of the account in Snapchat.
@@ -333,15 +333,15 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The date of the report.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: The ID of the campaign in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: region
         description: The region where the campaign was delivered.
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_id
         description: The ID of the account in Snapchat.

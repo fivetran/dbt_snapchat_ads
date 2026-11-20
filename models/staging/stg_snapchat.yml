@@ -15,11 +15,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_id
         description: The ID of the account in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: ad_account_name
         description: The name of the account in Snapchat.
@@ -50,11 +50,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
-        tests:
+        data_tests:
           - not_null
       - name: ad_id
         description: The ID of the ad in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: ad_squad_id
         description: The ID of the related ad squad in Snapchat.
@@ -83,11 +83,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: ad_id
         description: The ID of the ad that the report relates to in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: date_hour
         description: The hour that the report relates to.
-        tests:
+        data_tests:
           - not_null
       - name: attachment_quartile_1
         description: Number of times your Long Form Video was viewed to 25% 
@@ -142,11 +142,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
-        tests:
+        data_tests:
           - not_null
       - name: ad_squad_id
         description: The ID of the ad squad in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: ad_squad_name
         description: The name of the ad squad in Snapchat.
@@ -173,11 +173,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: ad_squad_id
         description: ID of the ad squad.
-        tests:
+        data_tests:
           - not_null
       - name: date_hour
         description: The hour that the report relates to.
-        tests:
+        data_tests:
           - not_null
       - name: attachment_quartile_1
         description: Number of times your Long Form Video was viewed to 25% 
@@ -232,11 +232,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: The id of the campaign in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: The name of the campaign in Snapchat.
@@ -275,11 +275,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: campaign_id
         description: ID of campaign
-        tests:
+        data_tests:
           - not_null
       - name: date_hour
         description: The hour that the report relates to.
-        tests:
+        data_tests:
           - not_null
       - name: attachment_quartile_1
         description: Number of times your Long Form Video was viewed to 25% 
@@ -334,11 +334,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
-        tests:
+        data_tests:
           - not_null
       - name: creative_id
         description: The ID of the creative in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: creative_name
         description: The name of the creative in Snapchat.
@@ -368,7 +368,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: creative_id
         description: The ID of the related creative in Snapchat.
-        tests:
+        data_tests:
           - not_null
       - name: param_key
         description: The URL parameter key, i.e. UTM_SOURCE.
@@ -394,15 +394,15 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: campaign_id
         description: ID of campaign
-        tests:
+        data_tests:
           - not_null
       - name: country
         description: The country that the report relates to.
-        tests:
+        data_tests:
           - not_null
       - name: date_day
         description: The day that the report relates to.
-        tests:
+        data_tests:
           - not_null
       - name: attachment_quartile_1
         description: Number of times your Long Form Video was viewed to 25% 
@@ -459,15 +459,15 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: campaign_id
         description: ID of campaign
-        tests:
+        data_tests:
           - not_null
       - name: region
         description: The region that the report relates to.
-        tests:
+        data_tests:
           - not_null
       - name: date_day
         description: The day that the report relates to.
-        tests:
+        data_tests:
           - not_null
       - name: attachment_quartile_1
         description: Number of times your Long Form Video was viewed to 25% 
